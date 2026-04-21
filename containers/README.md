@@ -6,11 +6,56 @@ All containers use `--runtime nvidia` for GPU access.
 
 | Image | Tag | Size | Pulled | Status |
 |---|---|---:|---|---|
+| `rimrock/mlc-gemma4` | `latest` | ~25GB | 2026-04-21 | **Active** — custom build, Gemma 4 E2B support |
 | `ghcr.io/nvidia-ai-iot/vllm` | `gemma4-jetson-orin` | 31.2GB | 2026-04-08 | Tested — dead end (see below) |
-| `dustynv/mlc` | `0.20.0-r36.4.0` | 24.3GB | 2025-05-02 | Tested — not competitive |
+| `dustynv/mlc` | `0.20.0-r36.4.0` | 24.3GB | 2025-05-02 | Base for rimrock/mlc-gemma4 |
 | `dustynv/onnxruntime` | `1.20.2-r36.4.0` | 17.4GB | 2025-02-18 | Not used — ORT built from source instead |
 | `dustynv/llama_cpp` | `r36.4.0` | 13GB | 2025-01-31 | **Not used** — too old, no Gemma 4 support |
 | `dustynv/tensorrt_llm` | `0.12-r36.4.0` | 27.9GB | 2024-11-13 | Not tested |
+
+### `rimrock/mlc-gemma4:latest` — Custom Build (2026-04-21)
+
+Built from source to add Gemma 4 E2B support. Based on `dustynv/mlc:0.20.0-r36.4.0` with a full TVM stack replacement.
+
+**What was replaced:**
+- `libtvm.so` + `libtvm_runtime.so` — rebuilt from [mlc-ai/relax PR #346](https://github.com/mlc-ai/relax/pull/346) (`prep/gemma4-e2b-support` branch). Adds KV cache fix for hybrid SWA/full attention and `tirx` module.
+- `libtvm_ffi.so` + `tvm_ffi` Python package — new FFI layer introduced in this TVM branch, completely replaces the old `tvm._ffi` C API.
+- Full `tvm` Python package — from same branch (no `_ffi` layer in new package).
+- `libmlc_llm.so` + `libmlc_llm_module.so` — rebuilt from [mlc-ai/mlc-llm PR #3485](https://github.com/mlc-ai/mlc-llm/pull/3485) (`prep/gemma4-e2b-text-only` branch) against new TVM.
+- Full `mlc_llm` Python package — from same branch (includes `Gemma4ForCausalLM`, `gemma4_loader.py`, `gemma4_e2b_it` preset).
+
+**Build artifacts on disk:**
+| Artifact | Path |
+|---|---|
+| TVM source (relax PR branch) | `/opt/tvm-gemma4/` |
+| MLC-LLM source (PR branch) | `/opt/mlc-llm-gemma4/` |
+| Docker build context | `/opt/mlc-gemma4-build/` |
+| Built `libtvm.so` | `/opt/tvm-gemma4/build/libtvm.so` (74MB) |
+| Built `libmlc_llm.so` | `/opt/mlc-llm-gemma4/build/libmlc_llm.so` (18MB) |
+| Pre-quantized weights | `/opt/models/gemma4-e2b-q4f16-mlc/` (2.5GB, q4f16_1) |
+| Compiled model lib | `/opt/models/gemma4-e2b-q4f16-mlc/lib-sm87.so` (pending) |
+
+**cmake flags used:**
+
+TVM:
+```bash
+cmake -B build -DUSE_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=87 \
+  -DUSE_LLVM=OFF -DUSE_OPENCL=OFF -DBUILD_STATIC_RUNTIME=OFF \
+  -DCMAKE_BUILD_TYPE=Release -DTVM_FFI_BUILD_PYTHON_MODULE=ON
+```
+
+MLC-LLM:
+```bash
+TVM_SOURCE_DIR=/opt/tvm-gemma4 cmake -B build \
+  -DCMAKE_BUILD_TYPE=Release -DUSE_CUDA=ON \
+  -DCMAKE_CUDA_ARCHITECTURES=87 -DUSE_FLASHINFER=OFF
+```
+
+**Known issue:** Built without LLVM (`USE_LLVM=OFF`). The `mlc_llm compile` command requires `--host aarch64-linux-gnu` to bypass LLVM auto-detection of the host target triple.
+
+**Rebuild script:** [`../runtimes/mlc/build-gemma4-image.sh`](../runtimes/mlc/build-gemma4-image.sh)
+
+**Full build history:** [`../runtimes/mlc/gemma4-build-plan.md`](../runtimes/mlc/gemma4-build-plan.md)
 
 ### `ghcr.io/nvidia-ai-iot/vllm:gemma4-jetson-orin` — Dead End
 
