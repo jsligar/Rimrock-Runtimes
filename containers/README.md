@@ -17,12 +17,17 @@ All containers use `--runtime nvidia` for GPU access.
 
 Built from source to add Gemma 4 E2B support. Based on `dustynv/mlc:0.20.0-r36.4.0` with a full TVM stack replacement.
 
+**Benchmark result:** **33.1 tok/s** (Gemma 4 E2B q4f16_1, 256-token decode, SM87) vs llama-server baseline of 26–29 tok/s. ~20% faster. GPU memory: 3128 MB total (params 2512 + KV 346 + buffer 270).
+
 **What was replaced:**
 - `libtvm.so` + `libtvm_runtime.so` — rebuilt from [mlc-ai/relax PR #346](https://github.com/mlc-ai/relax/pull/346) (`prep/gemma4-e2b-support` branch). Adds KV cache fix for hybrid SWA/full attention and `tirx` module.
 - `libtvm_ffi.so` + `tvm_ffi` Python package — new FFI layer introduced in this TVM branch, completely replaces the old `tvm._ffi` C API.
-- Full `tvm` Python package — from same branch (no `_ffi` layer in new package).
+- Full `tvm` Python package — from same branch (no `_ffi` layer in new package). Patched to register `target.target_has_feature` stub (LLVM function, needed by VectorizeLoop pass).
 - `libmlc_llm.so` + `libmlc_llm_module.so` — rebuilt from [mlc-ai/mlc-llm PR #3485](https://github.com/mlc-ai/mlc-llm/pull/3485) (`prep/gemma4-e2b-text-only` branch) against new TVM.
 - Full `mlc_llm` Python package — from same branch (includes `Gemma4ForCausalLM`, `gemma4_loader.py`, `gemma4_e2b_it` preset).
+
+**TVM source patches applied:**
+- `src/tirx/analysis/verify_memory.cc` — skip `VerifyMemory` for loop-free scalar GPU functions (Gemma 4's 0-D `zeros` init kernels have no thread bindings; all-thread idempotent writes are correct).
 
 **Build artifacts on disk:**
 | Artifact | Path |
@@ -30,17 +35,19 @@ Built from source to add Gemma 4 E2B support. Based on `dustynv/mlc:0.20.0-r36.4
 | TVM source (relax PR branch) | `/opt/tvm-gemma4/` |
 | MLC-LLM source (PR branch) | `/opt/mlc-llm-gemma4/` |
 | Docker build context | `/opt/mlc-gemma4-build/` |
-| Built `libtvm.so` | `/opt/tvm-gemma4/build/libtvm.so` (74MB) |
+| Built `libtvm.so` | `/opt/tvm-gemma4/build/libtvm.so` (97MB) |
 | Built `libmlc_llm.so` | `/opt/mlc-llm-gemma4/build/libmlc_llm.so` (18MB) |
 | Pre-quantized weights | `/opt/models/gemma4-e2b-q4f16-mlc/` (2.5GB, q4f16_1) |
-| Compiled model lib | `/opt/models/gemma4-e2b-q4f16-mlc/lib-sm87.so` (pending) |
+| Compiled model lib | `/opt/models/gemma4-e2b-q4f16-mlc/lib-sm87.so` (38MB) ✓ |
 
 **cmake flags used:**
 
-TVM:
+TVM (requires `llvm-15-dev` on host):
 ```bash
+sudo apt-get install -y llvm-15-dev
 cmake -B build -DUSE_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=87 \
-  -DUSE_LLVM=OFF -DUSE_OPENCL=OFF -DBUILD_STATIC_RUNTIME=OFF \
+  -DUSE_LLVM="llvm-config-15" -DUSE_THRUST=ON \
+  -DUSE_OPENCL=OFF -DBUILD_STATIC_RUNTIME=OFF \
   -DCMAKE_BUILD_TYPE=Release -DTVM_FFI_BUILD_PYTHON_MODULE=ON
 ```
 
@@ -50,8 +57,6 @@ TVM_SOURCE_DIR=/opt/tvm-gemma4 cmake -B build \
   -DCMAKE_BUILD_TYPE=Release -DUSE_CUDA=ON \
   -DCMAKE_CUDA_ARCHITECTURES=87 -DUSE_FLASHINFER=OFF
 ```
-
-**Known issue:** Built without LLVM (`USE_LLVM=OFF`). The `mlc_llm compile` command requires `--host aarch64-linux-gnu` to bypass LLVM auto-detection of the host target triple.
 
 **Rebuild script:** [`../runtimes/mlc/build-gemma4-image.sh`](../runtimes/mlc/build-gemma4-image.sh)
 

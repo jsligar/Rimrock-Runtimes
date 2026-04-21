@@ -18,8 +18,8 @@ MLC achieves 62.3 tok/s on Gemma 3 1B q4f16_1. Gemma 4 E2B is 2B params — even
 | 6 | Build Docker image `rimrock/mlc-gemma4:latest` | ✓ Done (2026-04-21) |
 | 7 | Sanity check (tvm_ffi, tvm, tirx, gemma4 model registered) | ✓ Passed |
 | 8 | Download pre-quantized weights (welcoma/gemma-4-E2B-it-q4f16_1-MLC) | ✓ Done (2.5GB, 46 shards) |
-| 9 | SM87 CUDA compile (`mlc_llm compile`) | ⏳ In progress / needs rerun |
-| 10 | Benchmark vs llama-server baseline | ⬜ Pending lib-sm87.so |
+| 9 | SM87 CUDA compile (`mlc_llm compile`) | ✓ Done — `lib-sm87.so` 38MB |
+| 10 | Benchmark vs llama-server baseline | ✓ Done — **33.1 tok/s** (baseline 26–29) |
 
 ## Upstream PR Status (as of 2026-04-21)
 
@@ -74,11 +74,14 @@ The new `tirx` module uses `tvm_ffi` object registration (`tvm/ffi/reflection/re
 ## cmake Flags
 
 ### TVM
+Requires `llvm-15-dev` on the host (`sudo apt-get install -y llvm-15-dev`).
+
 ```bash
 cmake -B build \
   -DUSE_CUDA=ON \
   -DCMAKE_CUDA_ARCHITECTURES=87 \
-  -DUSE_LLVM=OFF \
+  -DUSE_LLVM="llvm-config-15" \
+  -DUSE_THRUST=ON \
   -DUSE_OPENCL=OFF \
   -DBUILD_STATIC_RUNTIME=OFF \
   -DCMAKE_BUILD_TYPE=Release \
@@ -94,7 +97,7 @@ TVM_SOURCE_DIR=/opt/tvm-gemma4 cmake -B build \
   -DUSE_FLASHINFER=OFF
 ```
 
-**Known issue:** Built without LLVM (`USE_LLVM=OFF`). The `mlc_llm compile` command requires `--host aarch64-linux-gnu` to bypass LLVM auto-detection of the host target triple.
+**LLVM required:** `target.build.llvm` is needed for host-side TIR codegen during `mlc_llm compile`. The container includes `libllvm15` via `apt-get install`. No `--host` flag needed — LLVM auto-detects `aarch64-linux-gnu`.
 
 ## Build Issues Encountered and Resolved
 
@@ -146,7 +149,7 @@ Target: beat llama-server baseline of **26–29 tok/s**. Expected: **35–50 tok
 
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
-| SM87 compile fails (workgroup tuning) | Medium | Blocks Step 9 | `--overrides "max_num_threads=128"` |
+| ~~SM87 compile fails (workgroup tuning)~~ | ~~Medium~~ | ~~Blocks Step 9~~ | Resolved ✓ |
 | KV cache correctness issue at runtime | Low | Silent wrong output | Verify with known-good prompt |
 | PRs merge before we finish | Low | Makes this moot | Switch to official container when available |
 
