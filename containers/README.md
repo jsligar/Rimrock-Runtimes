@@ -26,6 +26,42 @@ vLLM 0.19.0, TRANSFORMERS 5.5.0, purpose-built for Gemma 4 on Jetson Orin. Inves
 
 **Conclusion:** vLLM is not viable for Gemma 4 E2B on 8GB unified memory with this architecture. The per-layer embedding design is the hard blocker regardless of quantization method.
 
+### TODO: Review `maarifa-vllm-jetson-orin` as SM87 Patch Reference
+
+Reference repo: <https://github.com/jdelacasa/maarifa-vllm-jetson-orin>
+
+Why it matters:
+
+- Builds vLLM `0.19.0` for Jetson Orin / SM87 from `dustynv/vllm:r36.4-cu129-24.04`
+- Patches vLLM and flash-attn CMake arch lists to include `8.7+PTX`
+- Works around Jetson-specific `torch 2.8.0` vs vLLM `0.19.x` compatibility issues
+- Handles Tegra `libcuda.so.1` preload problems in the entrypoint
+- Filters unsupported Jetson/aarch64 CUDA requirements during build
+
+Do **not** run the compose file as-is on Rimrock:
+
+- It targets AGX Orin-class memory, not Orin Nano 8GB
+- Default model is `Qwen/Qwen3.5-35B-A3B-GPTQ-Int4`
+- Default context/batch settings are `44000`, far beyond Rimrock's safe budget
+- Build time is expected to be multiple hours
+
+Safe exploration plan for Rimrock:
+
+1. Treat the repo as a patch reference, not a ready runtime.
+2. Extract the SM87 CMake, flash-attn, torch compatibility, and `libcuda` preload patches.
+3. Build only in a disposable Docker image with adequate disk space.
+4. Test with a small 1B-3B model first.
+5. Use strict low-memory settings:
+   - `--max-model-len 2048`
+   - `--max-num-seqs 1`
+   - `--gpu-memory-utilization 0.45`
+   - no large default MoE or 35B-class model
+6. Re-check whether vLLM V1 EngineCore subprocess memory isolation still leaves too little visible GPU memory.
+
+Success criterion:
+
+- A small instruct model serves through vLLM on Rimrock without EngineCore OOM and produces a measured decode rate. Anything else remains a build-patch reference only.
+
 ### `dustynv/mlc:0.20.0-r36.4.0` — Not Competitive
 
 MLC-LLM v0.20.0. Published ~May 2025, approximately 12 months old at time of testing.
