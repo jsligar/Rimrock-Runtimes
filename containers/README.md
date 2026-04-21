@@ -62,6 +62,32 @@ Success criterion:
 
 - A small instruct model serves through vLLM on Rimrock without EngineCore OOM and produces a measured decode rate. Anything else remains a build-patch reference only.
 
+### GitHub Search Terms for Runtime Dead Ends
+
+Use these searches when looking for repos that may push past Rimrock's current blockers:
+
+```text
+Jetson Orin Nano TensorRT-LLM int4
+Jetson Orin Nano llama.cpp CUDA graph
+Jetson Orin Nano CUTLASS int4 GEMV
+SM87 int4 weight only GEMV
+CUDA weightOnlyBatchedGemvBs1Int4b
+Jetson Orin Nano MLC LLM build
+mlc-llm Jetson Orin Nano CUDA 12.6
+TensorRT-LLM Jetson Orin Nano 8GB
+Gemma 3 GGUF Jetson Orin
+Qwen3 GGUF Jetson Orin
+Jetson Orin Nano TensorRT-LLM INT4 Llama Qwen Gemma
+MLC LLM Jetson CUDA 12.6 SM87
+vLLM Jetson Orin sm_87 0.19
+vLLM Jetson Orin Nano 8GB
+flash-attn sm_87 Jetson
+Marlin GPTQ sm_87 Jetson
+ONNX Runtime MatMulNBits CUDA custom kernel
+```
+
+Prioritize repos with exact commands, model IDs, quantization, power mode, context length, memory usage, and raw tok/s logs. Deprioritize generic Jetson demos, vision-only repos, old JetPack 4/Xavier material, or claims without raw artifacts.
+
 ### `dustynv/mlc:0.20.0-r36.4.0` — Not Competitive
 
 MLC-LLM v0.20.0. Published ~May 2025, approximately 12 months old at time of testing.
