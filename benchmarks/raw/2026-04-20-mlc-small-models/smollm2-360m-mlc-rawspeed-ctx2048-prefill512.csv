@@ -1,0 +1,2 @@
+timestamp, hostname, api, model, precision, input_tokens, output_tokens, prefill_time, prefill_rate, decode_time, decode_rate, memory
+20260420 19:29:06, rimrock, mlc, HF://dusty-nv/SmolLM2-360M-Instruct-q4f16_ft-MLC, MLC, 1, 115, 0.006587672666666667, 151.80146671225958, 0.6806935448132354, 169.64867817451835, 2487.44921875

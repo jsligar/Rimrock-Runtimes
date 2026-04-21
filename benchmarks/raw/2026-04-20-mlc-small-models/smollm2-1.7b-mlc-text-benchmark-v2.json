@@ -1,0 +1,218 @@
+{
+  "timestamp": "2026-04-20T19:11:35",
+  "model": "HF://dusty-nv/SmolLM2-1.7B-Instruct-q4f16_ft-MLC",
+  "backend": "mlc",
+  "average_score": 2.0,
+  "average_decode_tok_s_single_turn": 68.9,
+  "results": [
+    {
+      "id": "Q1",
+      "name": "Time Arithmetic",
+      "score": 1,
+      "tok_s": 69.5,
+      "tokens": 192,
+      "elapsed": 2.871,
+      "note": "wrong",
+      "response": "To calculate the time, we need to add up the time taken for each task and then add the 8-minute and 24-minute breaks.\n\n8-minute and 24-minute breaks are 20 minutes (8+24) since 17 minutes is 180 minutes (1+180) and 17 minutes is 180 minutes (1+180) since 17 is 17 minutes 17 is 180 minutes (1+180) since 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1 1 is 1",
+      "usage": {
+        "prompt_tokens": 112,
+        "completion_tokens": 192,
+        "prefill_tokens": 112,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 931.105113445556,
+        "decode_tokens_per_s": 69.50453083843071,
+        "end_to_end_latency_s": 2.8683094610000004,
+        "ttft_s": 0.12028717100000001,
+        "inter_token_latency_s": 0.014939111776041668
+      }
+    },
+    {
+      "id": "Q2",
+      "name": "Constraint Logic",
+      "score": 1,
+      "tok_s": 69.1,
+      "tokens": 15,
+      "elapsed": 0.25,
+      "note": "wrong",
+      "response": "I'm sorry, but I'm not sure who owns the dog.",
+      "usage": {
+        "prompt_tokens": 100,
+        "completion_tokens": 15,
+        "prefill_tokens": 70,
+        "decode_tokens": 14,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1529.8060972957112,
+        "decode_tokens_per_s": 69.14089362896247,
+        "end_to_end_latency_s": 0.24824252200000002,
+        "ttft_s": 0.045757433,
+        "inter_token_latency_s": 0.01654950146666667
+      }
+    },
+    {
+      "id": "Q3",
+      "name": "Code Writing",
+      "score": 1,
+      "tok_s": 68.1,
+      "tokens": 192,
+      "elapsed": 2.854,
+      "note": "missing expected code features",
+      "response": "```python\nfrom typing import List, Tuple\nfrom collections import deque\n\ndef group_even_runs(nums: List[int]) -> Tuple[List, ...]:\n    even_runs = deque(nums)\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.reverse()\n    even_runs.",
+      "usage": {
+        "prompt_tokens": 123,
+        "completion_tokens": 192,
+        "prefill_tokens": 93,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1969.912029659673,
+        "decode_tokens_per_s": 68.10103466650723,
+        "end_to_end_latency_s": 2.85186659,
+        "ttft_s": 0.047210230000000006,
+        "inter_token_latency_s": 0.014853471822916667
+      }
+    },
+    {
+      "id": "Q4",
+      "name": "Code Debugging",
+      "score": 3,
+      "tok_s": 68.2,
+      "tokens": 192,
+      "elapsed": 2.849,
+      "note": "mentions lower but fix unclear",
+      "response": "The issue in the given code is that it does not handle the case of an item not having a key. When an item does not have a key, the function will return a default value of 0 for the counts dictionary.\n\nHere's the fix for the bug:\n\n```python\ndef word_counts(items):\n    counts = {}\n    for item in items:\n        key = item.lower\n        counts[key] = counts.get(key, 0) + 1\n    return counts\n```\n\nBy using the get method, we can avoid a KeyError and a ValueError.\n\nHowever, a more Pythonic and Python 3-compliant way of doing this would be to use the items.lower and items.count methods:\n\n```python\ndef word_counts(items):\n    counts = {}\n    for item in items:\n        key = item.lower\n        counts[key] = counts",
+      "usage": {
+        "prompt_tokens": 108,
+        "completion_tokens": 192,
+        "prefill_tokens": 78,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1712.1956314338217,
+        "decode_tokens_per_s": 68.1775145857288,
+        "end_to_end_latency_s": 2.8470657050000003,
+        "ttft_s": 0.045555542000000004,
+        "inter_token_latency_s": 0.014828467213541668
+      }
+    },
+    {
+      "id": "Q5",
+      "name": "Format Fidelity",
+      "score": 1,
+      "tok_s": 69.4,
+      "tokens": 25,
+      "elapsed": 0.382,
+      "note": "wrong",
+      "response": "{\n\"red\": \"red\",\n\"blue\": \"blue\",\n\"green\": \"red\"\n}",
+      "usage": {
+        "prompt_tokens": 73,
+        "completion_tokens": 25,
+        "prefill_tokens": 43,
+        "decode_tokens": 24,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1257.3431397910883,
+        "decode_tokens_per_s": 69.39236021745356,
+        "end_to_end_latency_s": 0.380058496,
+        "ttft_s": 0.034199097000000005,
+        "inter_token_latency_s": 0.01520233984
+      }
+    },
+    {
+      "id": "Q6",
+      "name": "Technical Compression",
+      "score": 1,
+      "tok_s": 68.7,
+      "tokens": 192,
+      "elapsed": 2.803,
+      "note": "did not return exactly 2 bullets",
+      "response": "TCP (Transmission Control Protocol) is a connection-oriented, transport-layer protocol that is used to establish, maintain, and close a connection between two devices for the purpose of data transfer over the Internet or other computer networks. It is used for the reliable, ordered, and guaranteed delivery of data over the Internet or other computer networks and is the protocol of choice for many applications, including the World Wide Web, email, and file transfer.\n\nUDP (Transmission Control Protocol) is a connection-oriented, transport-layer protocol that is used to establish, maintain, and close a connection between two devices for the purpose of data transfer over the Internet or other computer networks. It is the protocol of choice for many applications, including the World Wide Web, email, and file transfer, and is the best choice for time-sensitive, one-to-one, and one-to-many data transfer over the Internet or other computer networks.",
+      "usage": {
+        "prompt_tokens": 60,
+        "completion_tokens": 192,
+        "prefill_tokens": 30,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1488.571935536499,
+        "decode_tokens_per_s": 68.6833748407045,
+        "end_to_end_latency_s": 2.801030291,
+        "ttft_s": 0.020153544000000002,
+        "inter_token_latency_s": 0.014588699432291666
+      }
+    },
+    {
+      "id": "Q7",
+      "name": "Uncertainty Calibration",
+      "score": 1,
+      "tok_s": 68.6,
+      "tokens": 192,
+      "elapsed": 2.822,
+      "note": "wrong format",
+      "response": "Estimate: 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "usage": {
+        "prompt_tokens": 74,
+        "completion_tokens": 192,
+        "prefill_tokens": 44,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1281.0254165923766,
+        "decode_tokens_per_s": 68.57488909524105,
+        "end_to_end_latency_s": 2.8196235890000003,
+        "ttft_s": 0.034347484000000005,
+        "inter_token_latency_s": 0.014685539526041668
+      }
+    },
+    {
+      "id": "Q8",
+      "name": "Fixed-Date Context",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 0,
+      "elapsed": 6.547,
+      "note": "wrong",
+      "response": "Turn2: You're a marine biologist, and I'm an AI, so I'm not sure how to take the guess work out of your career. But I can tell you, the more I know, the more I can help. You're a specialist in a particular area, and I'm an AI, so I can't tell you the answer to that question, but I can tell you, I'm here to help. You're a specialist, and I'm an AI, so I can only do so much, but I can tell you, I'm here to help. You're a specialist, and I'm an AI, so I can only do so much, but I can tell you, I'm here to help. You're a specialist, and I'm an AI, so I can only do so much, but I can tell you, I'm here to help. You're a specialist, and I'm an AI, so I can only\nTurn3: It's 2026-07-01 15:00 UTC, and I'm an AI, so I can only do so much, but I can tell you, it's 2026-07-01, and I can only do so much, but I can tell you, it's 2026-07-01, and I can only do so much, but I can tell you, it's 2026-07-01, and I can only do so much, but I can tell you, it's 2026-07-01, and I can only do so much, but I can only do so much, and I can only do so much, but I can only do so much, and I can only do so much, but I can only do so much, and I can only do",
+      "usage": {}
+    },
+    {
+      "id": "Q9",
+      "name": "Practical Helpfulness",
+      "score": 5,
+      "tok_s": 68.7,
+      "tokens": 192,
+      "elapsed": 2.8,
+      "note": "practical and formatted",
+      "response": "Sure, I can guide you through the process. Here are the steps to remove a stripped screw from a piece of wood:\n\n1. Gather Your Tools: You will need a screwdriver, a hammer, and a good pair of pincers.\n\n2. Assess the Situation: Before you start, take a closer look at the screw. Identify the screw that is stuck and the piece of wood.\n\n3. Use Your Tools: Use your screwdriver to pry the screw loose. If the screw is stuck, use your pincers to pry it.\n\n4. Remove the Screw: Once the screw is loose, use your hammer to tap the screw loose from the wood. Be careful not to hit the screw too hard, as it can be damaged.\n\n5. Inspect the Screw: After you remove the screw, take a look at the screw. If it is stripped, use your pincers to",
+      "usage": {
+        "prompt_tokens": 56,
+        "completion_tokens": 192,
+        "prefill_tokens": 26,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1275.4433784572118,
+        "decode_tokens_per_s": 68.7478223407401,
+        "end_to_end_latency_s": 2.798654888,
+        "ttft_s": 0.020385068000000003,
+        "inter_token_latency_s": 0.014576327541666668
+      }
+    },
+    {
+      "id": "Q10",
+      "name": "Semantic Nuance",
+      "score": 5,
+      "tok_s": 69.4,
+      "tokens": 37,
+      "elapsed": 0.554,
+      "note": "different translations",
+      "response": "English: \"I never said she stole my money.\"\nFrench: \"Je ne l'ai jamais dit qu'elle me steals ses argent.",
+      "usage": {
+        "prompt_tokens": 66,
+        "completion_tokens": 37,
+        "prefill_tokens": 36,
+        "decode_tokens": 36,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1073.9729924431679,
+        "decode_tokens_per_s": 69.4048642588051,
+        "end_to_end_latency_s": 0.552216029,
+        "ttft_s": 0.033520396,
+        "inter_token_latency_s": 0.01492475754054054
+      }
+    }
+  ]
+}

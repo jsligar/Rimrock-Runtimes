@@ -1,0 +1,218 @@
+{
+  "timestamp": "2026-04-20T21:25:31",
+  "model": "HF://mlc-ai/Qwen3-8B-q4f16_1-MLC",
+  "backend": "mlc",
+  "average_score": 2.4,
+  "average_decode_tok_s_single_turn": 14.8,
+  "results": [
+    {
+      "id": "Q1",
+      "name": "Time Arithmetic",
+      "score": 1,
+      "tok_s": 14.7,
+      "tokens": 96,
+      "elapsed": 6.805,
+      "note": "wrong",
+      "response": "<think>\nOkay, let's see. The job starts at 09:35. So I need to calculate the total time taken for all tasks and breaks, then add that to the start time.\n\nFirst, Task 1 is 17 minutes. Then there's an 8-minute break. So after Task 1, the time would be 09:35 plus 17 minutes. Let me calculate that. 09:35 +",
+      "usage": {
+        "prompt_tokens": 92,
+        "completion_tokens": 96,
+        "prefill_tokens": 92,
+        "decode_tokens": 95,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 289.0139907589033,
+        "decode_tokens_per_s": 14.666438256806293,
+        "end_to_end_latency_s": 6.795697292000001,
+        "ttft_s": 0.31832369,
+        "inter_token_latency_s": 0.07078851345833334
+      }
+    },
+    {
+      "id": "Q2",
+      "name": "Constraint Logic",
+      "score": 3,
+      "tok_s": 14.8,
+      "tokens": 96,
+      "elapsed": 6.726,
+      "note": "contains expected with extra text",
+      "response": "<think>\nOkay, let's try to figure out who owns the dog. So, there are three people: Anna, Ben, and Cara. Each has a different pet: cat, dog, fish. The clues are:\n\n1. Anna does not own the cat.\n2. Ben does not own the dog.\n3. Cara does not own the fish.\n4. Ben does not own the cat.\n\nWait, the fourth clue says Ben doesn't own the cat. So let",
+      "usage": {
+        "prompt_tokens": 80,
+        "completion_tokens": 96,
+        "prefill_tokens": 66,
+        "decode_tokens": 95,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 226.6252914354034,
+        "decode_tokens_per_s": 14.768135399958695,
+        "end_to_end_latency_s": 6.723998388,
+        "ttft_s": 0.29122963100000004,
+        "inter_token_latency_s": 0.070041649875
+      }
+    },
+    {
+      "id": "Q3",
+      "name": "Code Writing",
+      "score": 1,
+      "tok_s": 14.7,
+      "tokens": 96,
+      "elapsed": 6.747,
+      "note": "missing expected code features",
+      "response": "<think>\nOkay, I need to write a Python function called group_even_runs that takes a list of integers and returns a list of lists. Each sublist should be consecutive even numbers from the input, preserving the order. Let's see.\n\nSo the example input is [2,4,7,8,10,3,6]. The output is [[2,4], [8,10], [6]]. Let me think about how to approach this.\n\nThe idea",
+      "usage": {
+        "prompt_tokens": 100,
+        "completion_tokens": 96,
+        "prefill_tokens": 86,
+        "decode_tokens": 95,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 286.18290689662064,
+        "decode_tokens_per_s": 14.741268471255509,
+        "end_to_end_latency_s": 6.7450000160000005,
+        "ttft_s": 0.300507116,
+        "inter_token_latency_s": 0.07026041683333334
+      }
+    },
+    {
+      "id": "Q4",
+      "name": "Code Debugging",
+      "score": 5,
+      "tok_s": 14.8,
+      "tokens": 96,
+      "elapsed": 6.723,
+      "note": "bug fix identified",
+      "response": "<think>\nOkay, let's see. The user provided a Python function called word_counts that's supposed to count words case-insensitively, but there's a bug. I need to find and fix it.\n\nHmm, the function takes a list of items, right? And for each item, it's converting to lowercase using item.lower. Wait, wait. Oh right, the lower() method returns a string, but in the code, they're assigning key = item.lower",
+      "usage": {
+        "prompt_tokens": 85,
+        "completion_tokens": 96,
+        "prefill_tokens": 71,
+        "decode_tokens": 95,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 244.57579205551613,
+        "decode_tokens_per_s": 14.772486507172747,
+        "end_to_end_latency_s": 6.7211726,
+        "ttft_s": 0.290298559,
+        "inter_token_latency_s": 0.07001221458333333
+      }
+    },
+    {
+      "id": "Q5",
+      "name": "Format Fidelity",
+      "score": 1,
+      "tok_s": 14.8,
+      "tokens": 96,
+      "elapsed": 6.699,
+      "note": "not valid json",
+      "response": "<think>\nOkay, let's see. The user wants me to count the words in the string \"red blue red green red\" and reply with a JSON that has exactly the keys \"red\", \"blue\", \"green\" in that order. The values should be the counts of each word.\n\nFirst, I need to split the string into individual words. The string is \"red blue red green red\". Splitting by spaces gives [\"red\", \"blue\", \"red\", \"",
+      "usage": {
+        "prompt_tokens": 55,
+        "completion_tokens": 96,
+        "prefill_tokens": 41,
+        "decode_tokens": 95,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 145.6715527866275,
+        "decode_tokens_per_s": 14.808311847141812,
+        "end_to_end_latency_s": 6.696771095000001,
+        "ttft_s": 0.28145509,
+        "inter_token_latency_s": 0.06975803223958334
+      }
+    },
+    {
+      "id": "Q6",
+      "name": "Technical Compression",
+      "score": 1,
+      "tok_s": 14.8,
+      "tokens": 96,
+      "elapsed": 6.69,
+      "note": "did not return exactly 2 bullets",
+      "response": "<think>\nOkay, the user wants the difference between TCP and UDP in exactly two bullet points, each under 14 words. Let me start by recalling what I know about TCP and UDP.\n\nTCP is connection-oriented, so it establishes a connection before sending data. It ensures reliable delivery through acknowledgments and retransmissions. Also, it handles flow control and congestion. UDP is connectionless, so it just sends data without establishing a connection. It's faster but doesn't guarantee",
+      "usage": {
+        "prompt_tokens": 44,
+        "completion_tokens": 96,
+        "prefill_tokens": 30,
+        "decode_tokens": 95,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 108.14159654038593,
+        "decode_tokens_per_s": 14.81858327124313,
+        "end_to_end_latency_s": 6.688283328000001,
+        "ttft_s": 0.277414066,
+        "inter_token_latency_s": 0.069669618
+      }
+    },
+    {
+      "id": "Q7",
+      "name": "Uncertainty Calibration",
+      "score": 1,
+      "tok_s": 14.8,
+      "tokens": 96,
+      "elapsed": 6.698,
+      "note": "wrong format",
+      "response": "<think>\nOkay, so I need to find the boiling point of francium in degrees Celsius. Let me start by recalling what I know about francium. Francium is a chemical element with the symbol Fr and atomic number 87. It's part of the alkali metals group, which includes elements like sodium, potassium, and cesium. These elements are known for being highly reactive.\n\nNow, the question is about the boiling point. I remember that alkali metals have",
+      "usage": {
+        "prompt_tokens": 53,
+        "completion_tokens": 96,
+        "prefill_tokens": 39,
+        "decode_tokens": 95,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 138.90044809711938,
+        "decode_tokens_per_s": 14.807967869106431,
+        "end_to_end_latency_s": 6.69624166,
+        "ttft_s": 0.280776632,
+        "inter_token_latency_s": 0.06975251729166666
+      }
+    },
+    {
+      "id": "Q8",
+      "name": "Fixed-Date Context",
+      "score": 3,
+      "tok_s": 0.0,
+      "tokens": 0,
+      "elapsed": 20.196,
+      "note": "partial context retention",
+      "response": "Turn2: <think>\nOkay, the user is Maya, a marine biologist in Auckland. She asked, \"What field do I work in?\" So I need to clarify that. Wait, she already mentioned she works in marine biology. Maybe she's confused or wants to confirm. Let me check the previous messages. In the history, she said she works in marine biology. So the user is asking about her field, which is marine biology. But maybe she wants to know more specifics. Alternatively\nTurn3: <think>\nOkay, the user is asking for the local date and time in Auckland if the current UTC time is 2026-07-01 15:00. Let me recall the time zones. Auckland is in New Zealand, which uses New Zealand Time (NZT) during standard time and New Zealand Daylight Time (NZDT) during daylight saving. \n\nFirst, I need to check if daylight saving is in effect on that date.",
+      "usage": {}
+    },
+    {
+      "id": "Q9",
+      "name": "Practical Helpfulness",
+      "score": 3,
+      "tok_s": 14.8,
+      "tokens": 96,
+      "elapsed": 6.688,
+      "note": "helpful but format drift",
+      "response": "<think>\nOkay, the user wants to know how to safely remove a stripped screw from wood. Let me think about the steps. First, they might need to use a screw extractor. But wait, what if they don't have one? Maybe suggest using a drill bit. Wait, the question is about removing a stripped screw, so the screw is already damaged.\n\nStep one: Maybe start by drilling out the damaged screw. But how to do that without damaging the wood? Using",
+      "usage": {
+        "prompt_tokens": 39,
+        "completion_tokens": 96,
+        "prefill_tokens": 25,
+        "decode_tokens": 95,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 90.68725668835748,
+        "decode_tokens_per_s": 14.819714368381993,
+        "end_to_end_latency_s": 6.686052650000001,
+        "ttft_s": 0.27567269,
+        "inter_token_latency_s": 0.06964638177083333
+      }
+    },
+    {
+      "id": "Q10",
+      "name": "Semantic Nuance",
+      "score": 5,
+      "tok_s": 14.8,
+      "tokens": 96,
+      "elapsed": 6.697,
+      "note": "different translations",
+      "response": "<think>\nOkay, the user wants me to translate the sentence \"I never said she stole my money.\" into French first. Let me start by breaking down the original sentence. The key parts are \"I never said,\" \"she stole my money.\" \n\nFor \"I never said,\" the direct translation would be \"Je n'ai jamais dit.\" But I need to make sure the structure is correct. In French, the past participle agrees with the subject, so \"ai\"",
+      "usage": {
+        "prompt_tokens": 48,
+        "completion_tokens": 96,
+        "prefill_tokens": 34,
+        "decode_tokens": 95,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 121.60988612260694,
+        "decode_tokens_per_s": 14.807030175429464,
+        "end_to_end_latency_s": 6.6954538370000005,
+        "ttft_s": 0.279582533,
+        "inter_token_latency_s": 0.06974431080208333
+      }
+    }
+  ]
+}

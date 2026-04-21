@@ -1,0 +1,218 @@
+{
+  "timestamp": "2026-04-20T20:53:29",
+  "model": "HF://mlc-ai/gemma-3-1b-it-q4f16_1-MLC",
+  "backend": "mlc",
+  "average_score": 3.0,
+  "average_decode_tok_s_single_turn": 62.9,
+  "results": [
+    {
+      "id": "Q1",
+      "name": "Time Arithmetic",
+      "score": 1,
+      "tok_s": 61.6,
+      "tokens": 192,
+      "elapsed": 3.169,
+      "note": "wrong",
+      "response": "Let's break this down step by step:\n\n*   **Task 1:** The job starts at 9:35.\n*   Task 1 takes 17 minutes, so it's 9:35 + 17 minutes = 9:35 + 17 minutes\n*   Task 17 minutes\n*   Then there's a 8 minute break\n*   Task 2 takes 24 minutes\n*   Task 3 takes 39 minutes\n\nSo we have 39 minutes\n\nSo we have 39 minutes\n\nSo we have 39 minutes\n\nSo we have 39 minutes\n\nSo we have 39 minutes\n\nSo we have 39 minutes\n\nSo we have 39 minutes\n\nSo we have 39 minutes\n\nSo we have 39 minutes\n\nSo we have 39 minutes\n\nSo we have",
+      "usage": {
+        "prompt_tokens": 83,
+        "completion_tokens": 192,
+        "prefill_tokens": 83,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1267.0543415334594,
+        "decode_tokens_per_s": 61.59750220103274,
+        "end_to_end_latency_s": 3.16628135,
+        "ttft_s": 0.065506267,
+        "inter_token_latency_s": 0.016491048697916667
+      }
+    },
+    {
+      "id": "Q2",
+      "name": "Constraint Logic",
+      "score": 3,
+      "tok_s": 62.7,
+      "tokens": 192,
+      "elapsed": 3.102,
+      "note": "contains expected with extra text",
+      "response": "The dog is owned by Ben.\n\nLet's analyze this step by step:\n\n* Anna owns a cat.\n* Anna does not own the cat.\n* Ben does not own the dog.\n* Cara does not own the fish.\n* Therefore, the dog is owned by Ben.\n\nSo the answer is Ben.\n\nThe dog is owned by Ben.\n\nLet's re-evaluate:\n\n* Anna owns a cat.\n* Anna owns a cat.\n* Anna does not own the cat.\n* Ben does not own the dog.\n* Ben owns the dog.\n* Cara does not own the fish.\n* Cara does not own the fish.\n* Ben owns the dog.\n* Ben owns the dog.\n* Anna owns the fish.\n* Anna owns the fish.\n* Ben owns the dog.\n* Anna owns the fish.\n* Anna owns the fish.",
+      "usage": {
+        "prompt_tokens": 70,
+        "completion_tokens": 192,
+        "prefill_tokens": 66,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1256.899569268135,
+        "decode_tokens_per_s": 62.67669026600035,
+        "end_to_end_latency_s": 3.09989507,
+        "ttft_s": 0.052510162000000006,
+        "inter_token_latency_s": 0.016145286822916667
+      }
+    },
+    {
+      "id": "Q3",
+      "name": "Code Writing",
+      "score": 5,
+      "tok_s": 62.6,
+      "tokens": 192,
+      "elapsed": 3.108,
+      "note": "function shape looks correct",
+      "response": "```python\ndef group_even_runs(nums: list[int] -> list[int]\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    runs = []\n    runs = []\n    run_set = set()\n    for num in nums:\n        if num % 2 == 0:\n            run_set.add(num)\n        run_set.add(num)\n        run_set.add(num)\n        run_set.add(num)\n        run_set.add(num)\n        return runs\n    return runs\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"\n    \"\"\"",
+      "usage": {
+        "prompt_tokens": 96,
+        "completion_tokens": 192,
+        "prefill_tokens": 92,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1682.0105642695685,
+        "decode_tokens_per_s": 62.58983361524973,
+        "end_to_end_latency_s": 3.106310246,
+        "ttft_s": 0.054696446,
+        "inter_token_latency_s": 0.016178699197916667
+      }
+    },
+    {
+      "id": "Q4",
+      "name": "Code Debugging",
+      "score": 5,
+      "tok_s": 62.6,
+      "tokens": 192,
+      "elapsed": 3.108,
+      "note": "bug fix identified",
+      "response": "```python\ndef word_counts(items):\n    counts = {}\n    for item in items:\n        key = item.lower()\n        counts[key] = 0\n        counts[key] = 0\n        for item in items:\n            key = item.lower()\n            counts[key] = 0\n            for item in items:\n                key = item.lower()\n                counts[key] = 0\n                counts[key] = 0\n                for item in items:\n                    key = item.lower()\n                    counts[key] = 0\n                    for item in items:\n                        counts[key] = 0\n                        for item in items:\n                            counts[key = 0\n                            for item in items:\n                                counts[key = 0\n                                for item in items:\n                                counts[key = 0",
+      "usage": {
+        "prompt_tokens": 85,
+        "completion_tokens": 192,
+        "prefill_tokens": 81,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1511.149625733945,
+        "decode_tokens_per_s": 62.576485624823235,
+        "end_to_end_latency_s": 3.105866305,
+        "ttft_s": 0.053601575000000005,
+        "inter_token_latency_s": 0.016176387005208334
+      }
+    },
+    {
+      "id": "Q5",
+      "name": "Format Fidelity",
+      "score": 1,
+      "tok_s": 63.3,
+      "tokens": 33,
+      "elapsed": 0.557,
+      "note": "not valid json",
+      "response": "```json\n{\n  \"red\": 2,\n  \"blue\": 1,\n  \"green\": 1\n}\n```",
+      "usage": {
+        "prompt_tokens": 45,
+        "completion_tokens": 33,
+        "prefill_tokens": 41,
+        "decode_tokens": 32,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 829.6184973035172,
+        "decode_tokens_per_s": 63.25299853310366,
+        "end_to_end_latency_s": 0.5553251760000001,
+        "ttft_s": 0.049420306000000004,
+        "inter_token_latency_s": 0.01682803563636364
+      }
+    },
+    {
+      "id": "Q6",
+      "name": "Technical Compression",
+      "score": 5,
+      "tok_s": 63.4,
+      "tokens": 53,
+      "elapsed": 0.87,
+      "note": "constraints met",
+      "response": "Here's a breakdown of the difference between TCP and UDP in two bullet points:\n\n*   **TCP:** Reliable, ordered data transfer\n*   **UDP:** Unreliable, faster data transfer\n\nLet me know if you\u2019d like more details!",
+      "usage": {
+        "prompt_tokens": 33,
+        "completion_tokens": 53,
+        "prefill_tokens": 29,
+        "decode_tokens": 52,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 602.6689339210504,
+        "decode_tokens_per_s": 63.40388842440256,
+        "end_to_end_latency_s": 0.868258262,
+        "ttft_s": 0.048119288,
+        "inter_token_latency_s": 0.016382231358490568
+      }
+    },
+    {
+      "id": "Q7",
+      "name": "Uncertainty Calibration",
+      "score": 1,
+      "tok_s": 63.3,
+      "tokens": 18,
+      "elapsed": 0.32,
+      "note": "wrong format",
+      "response": "The boiling point of francium is approximately 2195 \u00b0C.",
+      "usage": {
+        "prompt_tokens": 46,
+        "completion_tokens": 18,
+        "prefill_tokens": 42,
+        "decode_tokens": 17,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 849.1707211030387,
+        "decode_tokens_per_s": 63.33961904535159,
+        "end_to_end_latency_s": 0.317854434,
+        "ttft_s": 0.049460019,
+        "inter_token_latency_s": 0.017658579666666667
+      }
+    },
+    {
+      "id": "Q8",
+      "name": "Fixed-Date Context",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 0,
+      "elapsed": 6.35,
+      "note": "wrong",
+      "response": "Turn2: Okay, fantastic! Auckland is a really cool place!\n\nI'm currently working on a project investigating the impact of plastic pollution on coral reef ecosystems \u2013 specifically, we're looking at how microplastics are affecting the health of certain species like clownfish and how they're being used as a food source for predators. It's a really fascinating area because we're seeing a huge increase in plastic ingestion and its impact on the coral health. It's a really worrying because we're seeing a lot of coral bleaching events are happening and it's a significant threat to the reef. It's a really complex issue. We're trying to understand how we can help the coral recovery.\n\nWhat about your favorite part of the project?\nTurn3: Okay, let's talk about the local time! It's a really interesting project! It's 2026-07-01 UTC, it's 26-07-01 UTC, it's 26-07-01 UTC, it's 26-07-01 UTC, it's 26-07-07-01 UTC, it's 26-07-07-01 UTC, it's 26-07-07-07-07-07-07-07-07-07-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7-7",
+      "usage": {}
+    },
+    {
+      "id": "Q9",
+      "name": "Practical Helpfulness",
+      "score": 3,
+      "tok_s": 63.3,
+      "tokens": 192,
+      "elapsed": 3.064,
+      "note": "helpful but format drift",
+      "response": "Okay, here's a 5 short, safe steps to remove a stripped screw in wood:\n\n1. **Use a rubber band or steel pick:** Wrap a thick rubber band or a piece of steel pick around the screw head to provide extra grip.\n2. **Tap the screwdriver:** Gently tap the screwdriver with a hammer or a hammer to create a small indentation.\n3. **Use a screw extractor:**  This is a specialized tool designed for removing stripped screws.\n4. **Use a screw extractor:**  This is a tool that grabs the screw and pulls the screw out.\n5. **Use a vise:**  Clamp the wood securely and turn the tool slowly.\n\n**Important Note:** Always use caution and work carefully to avoid damaging the wood.\n\n**Disclaimer:** *These are just suggestions, and always prioritize safety!*\n\n**Disclaimer:** *I am an AI Chatbot and not a professional. If you are",
+      "usage": {
+        "prompt_tokens": 29,
+        "completion_tokens": 192,
+        "prefill_tokens": 25,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 527.3249562209547,
+        "decode_tokens_per_s": 63.348149741421054,
+        "end_to_end_latency_s": 3.062493212,
+        "ttft_s": 0.047409097000000004,
+        "inter_token_latency_s": 0.01595048547916667
+      }
+    },
+    {
+      "id": "Q10",
+      "name": "Semantic Nuance",
+      "score": 5,
+      "tok_s": 63.2,
+      "tokens": 192,
+      "elapsed": 3.07,
+      "note": "different translations",
+      "response": "Here's a translation and a slightly more emphatic version emphasizing \"she\" in French:\n\n**Translation:**\n\n* **\"Je n'ai jamais dit qu'elle a vol\u00e9 mes argent.\"\n\n**Translation:** \"I never said she stole my money.\"\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis on \"she\"**\n\n**Emphasis**\n\n**She**\n\n**",
+      "usage": {
+        "prompt_tokens": 38,
+        "completion_tokens": 192,
+        "prefill_tokens": 34,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 702.4705434473278,
+        "decode_tokens_per_s": 63.249474000568384,
+        "end_to_end_latency_s": 3.0681885650000003,
+        "ttft_s": 0.048400606000000006,
+        "inter_token_latency_s": 0.015980148776041668
+      }
+    }
+  ]
+}

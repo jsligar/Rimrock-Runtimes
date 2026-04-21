@@ -10,6 +10,12 @@ This report summarizes the model testing done on Rimrock on April 20, 2026, with
 - fit/stability findings
 - practical recommendations
 
+Raw evidence and exact rerun commands are preserved under:
+
+- [`benchmarks/raw/2026-04-20-mlc-small-models/`](raw/2026-04-20-mlc-small-models/)
+- [`benchmarks/raw/2026-04-20-mlc-small-models/commands.md`](raw/2026-04-20-mlc-small-models/commands.md)
+- [`scripts/run_mlc_small_model_sweep.sh`](../scripts/run_mlc_small_model_sweep.sh)
+
 ## Hardware / system state used for testing
 
 - Device: Jetson Orin Nano class system ("Rimrock")
@@ -68,7 +74,7 @@ So the results below should be read as **MLC-on-Rimrock results**, not a general
 
 Artifact:
 
-- `/home/jsligar/jetson-containers/data/benchmarks/smollm2-360m-mlc-rawspeed-ctx2048-prefill512.csv`
+- [`raw/2026-04-20-mlc-small-models/smollm2-360m-mlc-rawspeed-ctx2048-prefill512.csv`](raw/2026-04-20-mlc-small-models/smollm2-360m-mlc-rawspeed-ctx2048-prefill512.csv)
 
 ### SmolLM2-1.7B-Instruct q4f16_ft
 
@@ -86,9 +92,9 @@ Artifact:
 
 Artifacts:
 
-- `/home/jsligar/jetson-containers/data/benchmarks/smollm2-1.7b-mlc-rawspeed-ctx2048-prefill512.csv`
-- `/home/jsligar/jetson-containers/data/benchmarks/smollm2-1.7b-mlc-text-benchmark-v2.json`
-- `/home/jsligar/jetson-containers/data/benchmarks/smollm2-1.7b-mlc-text-benchmark-v2-rerun-temps.json`
+- [`raw/2026-04-20-mlc-small-models/smollm2-1.7b-mlc-rawspeed-ctx2048-prefill512.csv`](raw/2026-04-20-mlc-small-models/smollm2-1.7b-mlc-rawspeed-ctx2048-prefill512.csv)
+- [`raw/2026-04-20-mlc-small-models/smollm2-1.7b-mlc-text-benchmark-v2.json`](raw/2026-04-20-mlc-small-models/smollm2-1.7b-mlc-text-benchmark-v2.json)
+- [`raw/2026-04-20-mlc-small-models/smollm2-1.7b-mlc-text-benchmark-v2-rerun-temps.json`](raw/2026-04-20-mlc-small-models/smollm2-1.7b-mlc-text-benchmark-v2-rerun-temps.json)
 
 ### Gemma 3 1B IT q4f16_1
 
@@ -106,8 +112,8 @@ Artifacts:
 
 Artifacts:
 
-- `/home/jsligar/jetson-containers/data/benchmarks/gemma-3-1b-it-q4f16_1-mlc-rawspeed-ctx2048-prefill512.csv`
-- `/home/jsligar/jetson-containers/data/benchmarks/gemma-3-1b-it-q4f16_1-mlc-text-benchmark-v2-ctx2048.json`
+- [`raw/2026-04-20-mlc-small-models/gemma-3-1b-it-q4f16_1-mlc-rawspeed-ctx2048-prefill512.csv`](raw/2026-04-20-mlc-small-models/gemma-3-1b-it-q4f16_1-mlc-rawspeed-ctx2048-prefill512.csv)
+- [`raw/2026-04-20-mlc-small-models/gemma-3-1b-it-q4f16_1-mlc-text-benchmark-v2-ctx2048.json`](raw/2026-04-20-mlc-small-models/gemma-3-1b-it-q4f16_1-mlc-text-benchmark-v2-ctx2048.json)
 
 ### Gemma 3 1B IT q0f16
 
@@ -126,8 +132,8 @@ Artifacts:
 
 Artifacts:
 
-- `/home/jsligar/jetson-containers/data/benchmarks/gemma-3-1b-it-q0f16-mlc-rawspeed-ctx2048-prefill512.csv`
-- `/home/jsligar/jetson-containers/data/benchmarks/gemma-3-1b-it-q0f16-mlc-text-benchmark-v2-ctx2048-prefill512.json`
+- [`raw/2026-04-20-mlc-small-models/gemma-3-1b-it-q0f16-mlc-rawspeed-ctx2048-prefill512.csv`](raw/2026-04-20-mlc-small-models/gemma-3-1b-it-q0f16-mlc-rawspeed-ctx2048-prefill512.csv)
+- [`raw/2026-04-20-mlc-small-models/gemma-3-1b-it-q0f16-mlc-text-benchmark-v2-ctx2048-prefill512.json`](raw/2026-04-20-mlc-small-models/gemma-3-1b-it-q0f16-mlc-text-benchmark-v2-ctx2048-prefill512.json)
 
 ### Gemma 3 4B IT q4f16_1
 
@@ -138,6 +144,7 @@ Artifacts:
   - memory looked potentially workable
   - blocked by tokenizer/runtime mismatch in current MLC path on this device
   - not a usable result today
+- Failure note: [`raw/2026-04-20-mlc-small-models/gemma-3-4b-mlc-failure-2026-04-20.md`](raw/2026-04-20-mlc-small-models/gemma-3-4b-mlc-failure-2026-04-20.md)
 
 ### Qwen3 8B q4f16_1
 
@@ -156,8 +163,8 @@ Artifacts:
 
 Artifacts:
 
-- `/home/jsligar/jetson-containers/data/benchmarks/qwen3-8b-q4f16_1-mlc-rawspeed-ctx2048-prefill512.csv`
-- `/home/jsligar/jetson-containers/data/benchmarks/qwen3-8b-q4f16_1-mlc-text-benchmark-v2-ctx2048-prefill512-tok96.json`
+- [`raw/2026-04-20-mlc-small-models/qwen3-8b-q4f16_1-mlc-rawspeed-ctx2048-prefill512.csv`](raw/2026-04-20-mlc-small-models/qwen3-8b-q4f16_1-mlc-rawspeed-ctx2048-prefill512.csv)
+- [`raw/2026-04-20-mlc-small-models/qwen3-8b-q4f16_1-mlc-text-benchmark-v2-ctx2048-prefill512-tok96.json`](raw/2026-04-20-mlc-small-models/qwen3-8b-q4f16_1-mlc-text-benchmark-v2-ctx2048-prefill512-tok96.json)
 
 ## Thermal / stability notes
 
@@ -232,6 +239,8 @@ Today’s results suggest the bigger blockers are:
 2. Re-test Gemma/Qwen on a different backend, especially TensorRT/TensorRT-LLM if available.
 3. Build a small local tool-calling benchmark, since today’s text benchmark only partially predicts tool use.
 4. If Qwen remains interesting, suppress or avoid visible `<think>` output before scoring it again.
+
+Initial tool-discipline probe scaffold: [`scripts/tool_call_probe.py`](../scripts/tool_call_probe.py). It has not yet been run against these MLC models.
 
 ## Bottom line
 

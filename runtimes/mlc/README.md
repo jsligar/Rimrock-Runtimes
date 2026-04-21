@@ -39,6 +39,7 @@ Overhead note: JIT compilation adds ~5 min first-run per model; subsequent runs 
 Container: `dustynv/mlc:0.20.0-r36.4.0`  
 Benchmark styles: raw speed via `benchmark.py` + text via `mlc_text_benchmark_from_nas.py`  
 Hardware state: CPU 1728 MHz, GPU ~1020 MHz, EMC 3199 MHz
+Raw artifacts and exact commands: [`../../benchmarks/raw/2026-04-20-mlc-small-models/`](../../benchmarks/raw/2026-04-20-mlc-small-models/)
 
 | Model | Quant | Decode tok/s | Text Score | Notes |
 |---|---|---:|---:|---|

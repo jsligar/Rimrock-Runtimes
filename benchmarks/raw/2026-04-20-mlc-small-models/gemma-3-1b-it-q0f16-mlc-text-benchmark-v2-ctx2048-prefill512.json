@@ -1,0 +1,218 @@
+{
+  "timestamp": "2026-04-20T22:12:03",
+  "model": "HF://mlc-ai/gemma-3-1b-it-q0f16-MLC",
+  "backend": "mlc",
+  "average_score": 3.0,
+  "average_decode_tok_s_single_turn": 43.9,
+  "results": [
+    {
+      "id": "Q1",
+      "name": "Time Arithmetic",
+      "score": 1,
+      "tok_s": 43.3,
+      "tokens": 128,
+      "elapsed": 3.113,
+      "note": "wrong",
+      "response": "Here\u2019s how to calculate the finish time:\n\n*   **Task 1:** 09:35 + 17 minutes = 10:42\n*   **Task 2:** 10:42 + 8 minutes = 10:42 + 8 minutes = 10:40\n*   **Task 3:** 10:40 + 39 minutes = 10:40 + 39 minutes = 10:79\n*   **Total time = 10:79\n\nTherefore, the job",
+      "usage": {
+        "prompt_tokens": 83,
+        "completion_tokens": 128,
+        "prefill_tokens": 83,
+        "decode_tokens": 127,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 467.1665419960516,
+        "decode_tokens_per_s": 43.328988573023246,
+        "end_to_end_latency_s": 3.108729943,
+        "ttft_s": 0.17766683300000002,
+        "inter_token_latency_s": 0.0242869526796875
+      }
+    },
+    {
+      "id": "Q2",
+      "name": "Constraint Logic",
+      "score": 1,
+      "tok_s": 44.1,
+      "tokens": 13,
+      "elapsed": 0.311,
+      "note": "wrong",
+      "response": "Here\u2019s the solution:\n\nBen owns the dog.",
+      "usage": {
+        "prompt_tokens": 70,
+        "completion_tokens": 13,
+        "prefill_tokens": 66,
+        "decode_tokens": 12,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1772.427029447747,
+        "decode_tokens_per_s": 44.084971828766186,
+        "end_to_end_latency_s": 0.309438679,
+        "ttft_s": 0.037237076,
+        "inter_token_latency_s": 0.023802975307692306
+      }
+    },
+    {
+      "id": "Q3",
+      "name": "Code Writing",
+      "score": 5,
+      "tok_s": 43.9,
+      "tokens": 73,
+      "elapsed": 1.684,
+      "note": "function shape looks correct",
+      "response": "```python\ndef group_even_runs(nums: list[int]) -> list[list[int]]\n    result = []\n    for num in nums:\n        if num % 2 == 0:\n            result.append(num)\n        else:\n            result.append(num)\n    return result\n```",
+      "usage": {
+        "prompt_tokens": 96,
+        "completion_tokens": 73,
+        "prefill_tokens": 92,
+        "decode_tokens": 72,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 2273.453733301389,
+        "decode_tokens_per_s": 43.86752144026937,
+        "end_to_end_latency_s": 1.6817724690000002,
+        "ttft_s": 0.040467065,
+        "inter_token_latency_s": 0.02303797902739726
+      }
+    },
+    {
+      "id": "Q4",
+      "name": "Code Debugging",
+      "score": 5,
+      "tok_s": 43.8,
+      "tokens": 128,
+      "elapsed": 2.939,
+      "note": "bug fix identified",
+      "response": "```python\ndef word_counts(items):\n    counts = {}\n    for item in items:\n        key = item.lower()\n        counts[key] = counts.get(key, 0) + 1\n    return counts\n```\n\n**Explanation:**\n\nThe original code has a bug:\n\nThe `counts.get(key, 0` is not the correct way to access the dictionary.  `counts.get(key` is not the correct way to access the dictionary.  `counts.get(key` is the correct way to access the dictionary.\n\nThe `counts",
+      "usage": {
+        "prompt_tokens": 85,
+        "completion_tokens": 128,
+        "prefill_tokens": 81,
+        "decode_tokens": 127,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 2087.0321791761953,
+        "decode_tokens_per_s": 43.824767416990206,
+        "end_to_end_latency_s": 2.9367158050000004,
+        "ttft_s": 0.038811093000000005,
+        "inter_token_latency_s": 0.022943092226562503
+      }
+    },
+    {
+      "id": "Q5",
+      "name": "Format Fidelity",
+      "score": 1,
+      "tok_s": 44.1,
+      "tokens": 29,
+      "elapsed": 0.668,
+      "note": "not valid json",
+      "response": "```json\n{\n\"red\": 2,\n\"blue\": 2,\n\"green\": 1\n}\n```",
+      "usage": {
+        "prompt_tokens": 45,
+        "completion_tokens": 29,
+        "prefill_tokens": 41,
+        "decode_tokens": 28,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1316.7298199192123,
+        "decode_tokens_per_s": 44.09001968283979,
+        "end_to_end_latency_s": 0.666202104,
+        "ttft_s": 0.031137747,
+        "inter_token_latency_s": 0.022972486344827587
+      }
+    },
+    {
+      "id": "Q6",
+      "name": "Technical Compression",
+      "score": 5,
+      "tok_s": 44.1,
+      "tokens": 58,
+      "elapsed": 1.323,
+      "note": "constraints met",
+      "response": "Here\u2019s a breakdown of the difference between TCP and UDP in two bullet points, each under 14 words or less:\n\n*   **TCP: Reliable, ordered data transfer, guaranteed delivery.**\n*   **UDP: Fast, connectionless, no guarantee of delivery.**",
+      "usage": {
+        "prompt_tokens": 33,
+        "completion_tokens": 58,
+        "prefill_tokens": 29,
+        "decode_tokens": 57,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 969.5491686634085,
+        "decode_tokens_per_s": 44.14213234431125,
+        "end_to_end_latency_s": 1.3211941470000002,
+        "ttft_s": 0.029910809000000003,
+        "inter_token_latency_s": 0.022779209431034484
+      }
+    },
+    {
+      "id": "Q7",
+      "name": "Uncertainty Calibration",
+      "score": 3,
+      "tok_s": 44.0,
+      "tokens": 11,
+      "elapsed": 0.26,
+      "note": "format correct but content weak",
+      "response": "estimate: 101\nconfidence: medium",
+      "usage": {
+        "prompt_tokens": 46,
+        "completion_tokens": 11,
+        "prefill_tokens": 42,
+        "decode_tokens": 10,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1341.5119139513372,
+        "decode_tokens_per_s": 44.04711228034855,
+        "end_to_end_latency_s": 0.258337598,
+        "ttft_s": 0.031307959,
+        "inter_token_latency_s": 0.02348523618181818
+      }
+    },
+    {
+      "id": "Q8",
+      "name": "Fixed-Date Context",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 0,
+      "elapsed": 7.885,
+      "note": "wrong",
+      "response": "Turn2: Okay, great! Let\u2019s dive a little deeper.\n\nYou work as a marine biologist in Auckland, and you\u2019re a researcher. You\u2019re focused on studying the marine environment. You\u2019re a researcher, and you\u2019re working with a lot of coral reefs. You\u2019re working with a lot of coral reefs. You\u2019re a researcher, and you\u2019re working with a lot of coral reefs.\nTurn3: Okay, great! 2023-01-07-01, it\u2019s 2023-01-01, it\u2019s 2023-01-01-01, it\u2019s 2023-01-01-01, it\u2019s 2023-01-01-01, it\u2019s 2023-01-01-01, it\u2019s 2023-01-01-01, it\u2019s",
+      "usage": {}
+    },
+    {
+      "id": "Q9",
+      "name": "Practical Helpfulness",
+      "score": 3,
+      "tok_s": 44.1,
+      "tokens": 128,
+      "elapsed": 2.91,
+      "note": "helpful but format drift",
+      "response": "Okay, removing a stripped screw can be frustrating, but here are 5 short steps to try, prioritizing safety and minimizing damage:\n\n1. **Use a Rubber Band Trick:** Place a wide rubber band (like from a soda or candy wrapper) around the screw head and push it into the stripped screw head to provide extra grip.\n2. **Tap Gently:** Use a rubber mallet or a wooden block to tap the screw head firmly to help loosen it.\n3. **Heat it up:** Apply heat with a hairdryer or heat gun (carefully!) to expand the wood slightly.\n4. **Use a screw extractor bit",
+      "usage": {
+        "prompt_tokens": 29,
+        "completion_tokens": 128,
+        "prefill_tokens": 25,
+        "decode_tokens": 127,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 869.2696052545886,
+        "decode_tokens_per_s": 44.11059909835476,
+        "end_to_end_latency_s": 2.9078863950000002,
+        "ttft_s": 0.028759777,
+        "inter_token_latency_s": 0.022717862460937502
+      }
+    },
+    {
+      "id": "Q10",
+      "name": "Semantic Nuance",
+      "score": 5,
+      "tok_s": 44.0,
+      "tokens": 128,
+      "elapsed": 2.916,
+      "note": "different translations",
+      "response": "Okay, here are the translations of the sentence \"I never said she stole my money\" into French, and then a version emphasizing \"she\":\n\n**Translation 1 (Neutral):**\n\n*   **Je n'ai jamais dit qu'elle a vol\u00e9 mesargent.**\n\n**Translation 2 (Emphasizing \"she\"):**\n\n*   **Je n'ai jamais dit qu'elle a vol\u00e9 maargent.**\n\n**Translation 3 (Emphasizing \"she\"):**\n\n*   **Elle n'a jamais dit qu'elle a vol\u00e9 maargent.**\n\nLet's break down the",
+      "usage": {
+        "prompt_tokens": 38,
+        "completion_tokens": 128,
+        "prefill_tokens": 34,
+        "decode_tokens": 127,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 1114.09575908636,
+        "decode_tokens_per_s": 44.04580089079753,
+        "end_to_end_latency_s": 2.913880283,
+        "ttft_s": 0.030518023000000002,
+        "inter_token_latency_s": 0.0227646897109375
+      }
+    }
+  ]
+}

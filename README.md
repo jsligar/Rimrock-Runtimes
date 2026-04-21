@@ -82,7 +82,11 @@ benchmarks/
   ort-progress-2026-04-19.md
   ort-profile-gemma4-e2b.md
   mlc-small-models-2026-04-20.md
+  raw/2026-04-20-mlc-small-models/  raw CSV/JSON artifacts + exact commands
   vision-benchmark-suite-v2.md
 models/
   README.md       what's on disk at /opt/models/, paths, quant notes
+scripts/
+  run_mlc_small_model_sweep.sh   rerun April 20 MLC sweep
+  tool_call_probe.py             lightweight OpenAI-compatible tool discipline probe
 ```

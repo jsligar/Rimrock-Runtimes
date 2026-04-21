@@ -1,0 +1,2 @@
+timestamp, hostname, api, model, precision, input_tokens, output_tokens, prefill_time, prefill_rate, decode_time, decode_rate, memory
+20260420 20:35:45, rimrock, mlc, HF://mlc-ai/gemma-3-1b-it-q4f16_1-MLC, MLC, 13, 109, 0.03938251733333334, 288.33813354756353, 1.7458534580496439, 62.27038123957577, 3504.4296875
