@@ -1,0 +1,212 @@
+{
+  "timestamp": "2026-04-21T22:46:23",
+  "model": "/weights",
+  "backend": "mlc",
+  "average_score": 1.0,
+  "average_decode_tok_s_single_turn": 34.8,
+  "results": [
+    {
+      "id": "Q1",
+      "name": "Time Arithmetic",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.344,
+      "note": "wrong",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 83,
+        "completion_tokens": 1,
+        "prefill_tokens": 83,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 246.65718005321537,
+        "end_to_end_latency_s": 0.336881388,
+        "ttft_s": 0.33649942800000004,
+        "inter_token_latency_s": 0.336881388
+      }
+    },
+    {
+      "id": "Q2",
+      "name": "Constraint Logic",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.174,
+      "note": "wrong",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 70,
+        "completion_tokens": 1,
+        "prefill_tokens": 70,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 413.6712411988709,
+        "end_to_end_latency_s": 0.17235839,
+        "ttft_s": 0.16921650100000002,
+        "inter_token_latency_s": 0.17235839
+      }
+    },
+    {
+      "id": "Q3",
+      "name": "Code Writing",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.208,
+      "note": "missing expected code features",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 96,
+        "completion_tokens": 1,
+        "prefill_tokens": 96,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 465.5110297165075,
+        "end_to_end_latency_s": 0.20630104000000002,
+        "ttft_s": 0.206224974,
+        "inter_token_latency_s": 0.20630104000000002
+      }
+    },
+    {
+      "id": "Q4",
+      "name": "Code Debugging",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.2,
+      "note": "wrong",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 85,
+        "completion_tokens": 1,
+        "prefill_tokens": 85,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 429.94554537340525,
+        "end_to_end_latency_s": 0.197783393,
+        "ttft_s": 0.19769945500000002,
+        "inter_token_latency_s": 0.197783393
+      }
+    },
+    {
+      "id": "Q5",
+      "name": "Format Fidelity",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.132,
+      "note": "not valid json",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 45,
+        "completion_tokens": 1,
+        "prefill_tokens": 45,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 344.9125166192263,
+        "end_to_end_latency_s": 0.13054569100000002,
+        "ttft_s": 0.13046786600000002,
+        "inter_token_latency_s": 0.13054569100000002
+      }
+    },
+    {
+      "id": "Q6",
+      "name": "Technical Compression",
+      "score": 1,
+      "tok_s": 32.5,
+      "tokens": 22,
+      "elapsed": 0.773,
+      "note": "did not return exactly 2 bullets",
+      "response": "Here's the difference between TCP and UDP:\n\n* **Reliability\n* Connection\n* Overhead",
+      "usage": {
+        "prompt_tokens": 33,
+        "completion_tokens": 22,
+        "prefill_tokens": 33,
+        "decode_tokens": 21,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 265.541290874107,
+        "decode_tokens_per_s": 32.463876165759046,
+        "end_to_end_latency_s": 0.7711473050000001,
+        "ttft_s": 0.124274458,
+        "inter_token_latency_s": 0.03505215022727273
+      }
+    },
+    {
+      "id": "Q7",
+      "name": "Uncertainty Calibration",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.133,
+      "note": "wrong format",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 46,
+        "completion_tokens": 1,
+        "prefill_tokens": 46,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 353.00219077763967,
+        "end_to_end_latency_s": 0.130396856,
+        "ttft_s": 0.130310806,
+        "inter_token_latency_s": 0.130396856
+      }
+    },
+    {
+      "id": "Q8",
+      "name": "Fixed-Date Context",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 0,
+      "elapsed": 1.479,
+      "note": "wrong",
+      "response": "Turn2: Please rephrase your question\nTurn3: Please rephrase your question",
+      "usage": {}
+    },
+    {
+      "id": "Q9",
+      "name": "Practical Helpfulness",
+      "score": 1,
+      "tok_s": 36.1,
+      "tokens": 12,
+      "elapsed": 0.42,
+      "note": "weak",
+      "response": "Please provide the text you would like me to process.",
+      "usage": {
+        "prompt_tokens": 29,
+        "completion_tokens": 12,
+        "prefill_tokens": 29,
+        "decode_tokens": 11,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 254.7665503818423,
+        "decode_tokens_per_s": 36.066425647640536,
+        "end_to_end_latency_s": 0.41882249600000004,
+        "ttft_s": 0.1138297,
+        "inter_token_latency_s": 0.03490187466666667
+      }
+    },
+    {
+      "id": "Q10",
+      "name": "Semantic Nuance",
+      "score": 1,
+      "tok_s": 35.7,
+      "tokens": 8,
+      "elapsed": 0.322,
+      "note": "wrong",
+      "response": "Please provide the sentence you want me",
+      "usage": {
+        "prompt_tokens": 38,
+        "completion_tokens": 8,
+        "prefill_tokens": 38,
+        "decode_tokens": 7,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 304.39389544130563,
+        "decode_tokens_per_s": 35.7486640737003,
+        "end_to_end_latency_s": 0.32064975900000003,
+        "ttft_s": 0.12483824600000001,
+        "inter_token_latency_s": 0.040081219875000004
+      }
+    }
+  ]
+}

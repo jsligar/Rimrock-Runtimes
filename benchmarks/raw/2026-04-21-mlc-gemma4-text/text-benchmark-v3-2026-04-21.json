@@ -1,0 +1,214 @@
+{
+  "timestamp": "2026-04-21T23:05:40",
+  "model": "/weights",
+  "backend": "mlc",
+  "average_score": 1.0,
+  "average_decode_tok_s_single_turn": 29.6,
+  "results": [
+    {
+      "id": "Q1",
+      "name": "Time Arithmetic",
+      "score": 1,
+      "tok_s": 13.1,
+      "tokens": 2,
+      "elapsed": 0.37,
+      "note": "wrong",
+      "response": "4",
+      "usage": {
+        "prompt_tokens": 55,
+        "completion_tokens": 2,
+        "prefill_tokens": 55,
+        "decode_tokens": 1,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 190.93884969139958,
+        "decode_tokens_per_s": 13.127526622230162,
+        "end_to_end_latency_s": 0.364226149,
+        "ttft_s": 0.28805033700000005,
+        "inter_token_latency_s": 0.1821130745
+      }
+    },
+    {
+      "id": "Q2",
+      "name": "Constraint Logic",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.174,
+      "note": "wrong",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 71,
+        "completion_tokens": 1,
+        "prefill_tokens": 71,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 420.4945788535952,
+        "end_to_end_latency_s": 0.168960662,
+        "ttft_s": 0.168848788,
+        "inter_token_latency_s": 0.168960662
+      }
+    },
+    {
+      "id": "Q3",
+      "name": "Code Writing",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.177,
+      "note": "missing expected code features",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 75,
+        "completion_tokens": 1,
+        "prefill_tokens": 75,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 429.8092103276986,
+        "end_to_end_latency_s": 0.17477757000000002,
+        "ttft_s": 0.174496028,
+        "inter_token_latency_s": 0.17477757000000002
+      }
+    },
+    {
+      "id": "Q4",
+      "name": "Code Debugging",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.178,
+      "note": "wrong",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 79,
+        "completion_tokens": 1,
+        "prefill_tokens": 79,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 449.7717075525374,
+        "end_to_end_latency_s": 0.175715417,
+        "ttft_s": 0.175644663,
+        "inter_token_latency_s": 0.175715417
+      }
+    },
+    {
+      "id": "Q5",
+      "name": "Format Fidelity",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.171,
+      "note": "not valid json",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 70,
+        "completion_tokens": 1,
+        "prefill_tokens": 70,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 414.0020851747307,
+        "end_to_end_latency_s": 0.169444322,
+        "ttft_s": 0.169081274,
+        "inter_token_latency_s": 0.169444322
+      }
+    },
+    {
+      "id": "Q6",
+      "name": "Technical Compression",
+      "score": 1,
+      "tok_s": 32.7,
+      "tokens": 192,
+      "elapsed": 5.973,
+      "note": "did not return exactly 2 bullets",
+      "response": "Here is an explanation of the difference between **stack and heap memory.\n\n## Stack and Heap and Heap and Heap and Heap and Stack and Heap and Stack and Heap and Stack and Heap and Stack and Heap and Stack and Heap and Stack and Heap and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and Stack and",
+      "usage": {
+        "prompt_tokens": 34,
+        "completion_tokens": 192,
+        "prefill_tokens": 34,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 273.59353569931335,
+        "decode_tokens_per_s": 32.66502145141716,
+        "end_to_end_latency_s": 5.971505206000001,
+        "ttft_s": 0.12427194200000001,
+        "inter_token_latency_s": 0.031101589614583338
+      }
+    },
+    {
+      "id": "Q7",
+      "name": "Uncertainty Calibration",
+      "score": 1,
+      "tok_s": 31.9,
+      "tokens": 192,
+      "elapsed": 6.112,
+      "note": "wrong format",
+      "response": "confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|confidence|",
+      "usage": {
+        "prompt_tokens": 46,
+        "completion_tokens": 192,
+        "prefill_tokens": 46,
+        "decode_tokens": 191,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 354.13466463331775,
+        "decode_tokens_per_s": 31.935413172996206,
+        "end_to_end_latency_s": 6.110715411,
+        "ttft_s": 0.12989409000000002,
+        "inter_token_latency_s": 0.031826642765625
+      }
+    },
+    {
+      "id": "Q8",
+      "name": "Fixed-Date Context",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 0,
+      "elapsed": 1.241,
+      "note": "wrong",
+      "response": "Turn2: Could you please tell me what you are working in marine?\nTurn3: ",
+      "usage": {}
+    },
+    {
+      "id": "Q9",
+      "name": "Practical Helpfulness",
+      "score": 1,
+      "tok_s": 35.7,
+      "tokens": 22,
+      "elapsed": 0.703,
+      "note": "weak",
+      "response": "It sounds like you're asking for **steps** to **fix** a **flat** tire**",
+      "usage": {
+        "prompt_tokens": 28,
+        "completion_tokens": 22,
+        "prefill_tokens": 28,
+        "decode_tokens": 21,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 245.89086938176902,
+        "decode_tokens_per_s": 35.729497669447376,
+        "end_to_end_latency_s": 0.701621311,
+        "ttft_s": 0.113871654,
+        "inter_token_latency_s": 0.03189187777272728
+      }
+    },
+    {
+      "id": "Q10",
+      "name": "Semantic Nuance",
+      "score": 1,
+      "tok_s": 34.6,
+      "tokens": 16,
+      "elapsed": 0.565,
+      "note": "wrong",
+      "response": "Here are a few ways to translate the phrase \"man\" into Spanish.",
+      "usage": {
+        "prompt_tokens": 48,
+        "completion_tokens": 16,
+        "prefill_tokens": 48,
+        "decode_tokens": 15,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 368.4225974210663,
+        "decode_tokens_per_s": 34.61689415162504,
+        "end_to_end_latency_s": 0.5635996050000001,
+        "ttft_s": 0.130285168,
+        "inter_token_latency_s": 0.035224975312500004
+      }
+    }
+  ]
+}
