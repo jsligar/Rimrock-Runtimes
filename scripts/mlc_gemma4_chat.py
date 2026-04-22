@@ -2,10 +2,13 @@
 """Interactive CLI chat with rimrock/mlc-gemma4.
 
 Settings tuned for Rimrock (Jetson Orin Nano 8GB, SM87):
-  - 16384 context  (~234 MB KV, well within 8GB unified)
-  - 8192 prefill chunk (matches compiled lib-sm87-fresh.so)
+  - 4096 context  (hard limit baked into lib-sm87-fresh.so at compile time)
+  - 1024 prefill chunk (baked into lib-sm87-fresh.so at compile time)
   - temperature 0.1  (deterministic, matches benchmark settings)
   - 1024 max tokens/response (enough for code + explanation)
+
+Note: model_config.text_config shows 131072/8192 — those are HF architecture
+values, not what was compiled. The compiled .so embedding shape is [1024,...].
 """
 from __future__ import annotations
 
@@ -17,8 +20,8 @@ from mlc_llm.serve import EngineConfig
 MODEL = "/weights"
 MODEL_LIB = "/weights/lib-sm87-fresh.so"
 DEFAULT_MAX_TOKENS = 1024
-CONTEXT_WINDOW = 16384
-PREFILL_CHUNK = 8192
+CONTEXT_WINDOW = 4096
+PREFILL_CHUNK = 1024
 TEMPERATURE = 0.1
 
 
