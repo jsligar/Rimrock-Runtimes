@@ -49,9 +49,13 @@ patchelf --set-rpath "$TARGET_RPATH_MLC" "$BUILD_CTX/libmlc_llm_module.so"
 
 # Python packages (sync from source trees)
 rsync -a --delete "$TVM_SRC/python/tvm/" "$BUILD_CTX/tvm_python/"
+# tvm_ffi: save compiled Cython .so before rsync wipes it, restore after
+_CORE_SO="$BUILD_CTX/tvm_ffi/core.cpython-310-aarch64-linux-gnu.so"
+_CORE_TMP=$(mktemp /tmp/core_so_backup.XXXXXX)
+cp "$_CORE_SO" "$_CORE_TMP"
 rsync -a --delete "$TVM_SRC/3rdparty/tvm-ffi/python/tvm_ffi/" "$BUILD_CTX/tvm_ffi/"
-# restore the compiled Cython extension after rsync
-cp "$BUILD_CTX/tvm_ffi/core.cpython-310-aarch64-linux-gnu.so" "$BUILD_CTX/tvm_ffi/core.cpython-310-aarch64-linux-gnu.so" 2>/dev/null || true
+cp "$_CORE_TMP" "$_CORE_SO"
+rm -f "$_CORE_TMP"
 rsync -a --delete "$MLC_SRC/python/mlc_llm/" "$BUILD_CTX/mlc_llm_python/"
 
 # ── Build Docker image ────────────────────────────────────────────────────────

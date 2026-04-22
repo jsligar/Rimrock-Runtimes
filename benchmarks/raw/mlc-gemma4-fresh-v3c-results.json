@@ -1,0 +1,217 @@
+{
+  "timestamp": "2026-04-22T13:30:14",
+  "model": "/weights",
+  "backend": "mlc",
+  "average_score": 2.8,
+  "average_decode_tok_s_single_turn": 33.3,
+  "results": [
+    {
+      "id": "Q1",
+      "name": "Time Arithmetic",
+      "score": 5,
+      "tok_s": 26.9,
+      "tokens": 6,
+      "elapsed": 0.451,
+      "note": "exact",
+      "response": "22:10",
+      "usage": {
+        "prompt_tokens": 55,
+        "completion_tokens": 6,
+        "prefill_tokens": 55,
+        "decode_tokens": 5,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 213.48104959192338,
+        "decode_tokens_per_s": 26.932434058641913,
+        "end_to_end_latency_s": 0.443283872,
+        "ttft_s": 0.257634109,
+        "inter_token_latency_s": 0.07388064533333334
+      }
+    },
+    {
+      "id": "Q2",
+      "name": "Constraint Logic",
+      "score": 5,
+      "tok_s": 34.8,
+      "tokens": 2,
+      "elapsed": 0.197,
+      "note": "exact",
+      "response": "Fern",
+      "usage": {
+        "prompt_tokens": 71,
+        "completion_tokens": 2,
+        "prefill_tokens": 71,
+        "decode_tokens": 1,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 425.7870579313097,
+        "decode_tokens_per_s": 34.84490532639222,
+        "end_to_end_latency_s": 0.19544861900000002,
+        "ttft_s": 0.166750019,
+        "inter_token_latency_s": 0.09772430950000001
+      }
+    },
+    {
+      "id": "Q3",
+      "name": "Code Writing",
+      "score": 1,
+      "tok_s": 34.2,
+      "tokens": 14,
+      "elapsed": 0.555,
+      "note": "missing expected code features",
+      "response": "1, 2, 3, 4, 5",
+      "usage": {
+        "prompt_tokens": 75,
+        "completion_tokens": 14,
+        "prefill_tokens": 75,
+        "decode_tokens": 13,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 434.68578338237273,
+        "decode_tokens_per_s": 34.16100903422044,
+        "end_to_end_latency_s": 0.553089244,
+        "ttft_s": 0.17253842400000002,
+        "inter_token_latency_s": 0.039506374571428575
+      }
+    },
+    {
+      "id": "Q4",
+      "name": "Code Debugging",
+      "score": 5,
+      "tok_s": 30.7,
+      "tokens": 251,
+      "elapsed": 8.325,
+      "note": "bug fix identified",
+      "response": "The provided Python function `remove_duplicates` is intended to remove duplicates from a list. However, the implementation has a bug as described.\n\nHere is the original buggy code:\n\n```python\ndef remove_duplicates(items: list) -> list:\n    seen = []\n    for item in items:\n        if item not in seen:\n            seen.append(item)\n    return items\n```\n\n**The Bug:**\nThe function correctly builds a list `seen` containing only the unique elements. However, it returns the original input list `items` instead of the list containing the unique elements (which is `seen`).\n\n**The Fix:**\n\nTo fix the function so that it returns the list with duplicates removed, we need to change the return statement.\n\n```python\ndef remove_duplicates(items: list) -> list:\n    seen = []\n    for item in items:\n        if item not in seen:\n            seen.append(item)\n    return seen\n```\n\n**Explanation of the Fix:**\nBy changing `return items` to `return seen`, the function now returns the list that was constructed to hold only the unique elements encountered in the input list.",
+      "usage": {
+        "prompt_tokens": 79,
+        "completion_tokens": 251,
+        "prefill_tokens": 79,
+        "decode_tokens": 250,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 455.6010360090737,
+        "decode_tokens_per_s": 30.67293675560114,
+        "end_to_end_latency_s": 8.323904788,
+        "ttft_s": 0.17339732300000002,
+        "inter_token_latency_s": 0.03316296728286853
+      }
+    },
+    {
+      "id": "Q5",
+      "name": "Format Fidelity",
+      "score": 1,
+      "tok_s": 34.4,
+      "tokens": 21,
+      "elapsed": 0.75,
+      "note": "not valid json",
+      "response": "\"min\": 4, \"max\": 23, \"mean\": 15.",
+      "usage": {
+        "prompt_tokens": 70,
+        "completion_tokens": 21,
+        "prefill_tokens": 70,
+        "decode_tokens": 20,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 419.5749881591442,
+        "decode_tokens_per_s": 34.40279454450529,
+        "end_to_end_latency_s": 0.7481836150000001,
+        "ttft_s": 0.166835493,
+        "inter_token_latency_s": 0.035627791190476196
+      }
+    },
+    {
+      "id": "Q6",
+      "name": "Technical Compression",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 1,
+      "elapsed": 0.123,
+      "note": "did not return exactly 2 bullets",
+      "response": "",
+      "usage": {
+        "prompt_tokens": 34,
+        "completion_tokens": 1,
+        "prefill_tokens": 34,
+        "decode_tokens": 0,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 279.449109477468,
+        "end_to_end_latency_s": 0.12173620700000001,
+        "ttft_s": 0.12166794900000001,
+        "inter_token_latency_s": 0.12173620700000001
+      }
+    },
+    {
+      "id": "Q7",
+      "name": "Uncertainty Calibration",
+      "score": 3,
+      "tok_s": 35.5,
+      "tokens": 16,
+      "elapsed": 0.552,
+      "note": "format correct but content weak",
+      "response": "estimate: <value>\nconfidence: <low|medium|high>",
+      "usage": {
+        "prompt_tokens": 46,
+        "completion_tokens": 16,
+        "prefill_tokens": 46,
+        "decode_tokens": 15,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 359.9119605269843,
+        "decode_tokens_per_s": 35.46091217763965,
+        "end_to_end_latency_s": 0.550809997,
+        "ttft_s": 0.12780903400000002,
+        "inter_token_latency_s": 0.0344256248125
+      }
+    },
+    {
+      "id": "Q8",
+      "name": "Fixed-Date Context",
+      "score": 1,
+      "tok_s": 0.0,
+      "tokens": 0,
+      "elapsed": 1.178,
+      "note": "wrong",
+      "response": "Turn2: Your profession is **engineer**.\nTurn3: Please tell me your **local time zone** so I can calculate the correct local date and time for you.",
+      "usage": {}
+    },
+    {
+      "id": "Q9",
+      "name": "Practical Helpfulness",
+      "score": 5,
+      "tok_s": 34.1,
+      "tokens": 127,
+      "elapsed": 3.808,
+      "note": "practical and formatted",
+      "response": "Here are 5 short, numbered steps on what to do about your flat tire:\n\n1. **Assess the Damage:** Visually check the tire for cuts, punctures, or bulges.\n2. **Locate the Flat:** Identify exactly which tire is flat.\n3. **Check the Rim/Valve:** Ensure the rim is straight and the valve stem is secure.\n4. **Repair or Replace:** Either patch the puncture (if small) or replace the inner tube/tire (if damaged).\n5. **Inflate and Test:** Inflate the tire to the recommended pressure and test the bike.",
+      "usage": {
+        "prompt_tokens": 28,
+        "completion_tokens": 127,
+        "prefill_tokens": 28,
+        "decode_tokens": 126,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 252.72396722906652,
+        "decode_tokens_per_s": 34.09372808690736,
+        "end_to_end_latency_s": 3.8064872170000004,
+        "ttft_s": 0.110792816,
+        "inter_token_latency_s": 0.029972340291338585
+      }
+    },
+    {
+      "id": "Q10",
+      "name": "Semantic Nuance",
+      "score": 1,
+      "tok_s": 35.5,
+      "tokens": 9,
+      "elapsed": 0.356,
+      "note": "wrong",
+      "response": "I see the man holding the binoculars.",
+      "usage": {
+        "prompt_tokens": 48,
+        "completion_tokens": 9,
+        "prefill_tokens": 48,
+        "decode_tokens": 8,
+        "jump_forward_tokens": 0,
+        "prefill_tokens_per_s": 373.3727685502889,
+        "decode_tokens_per_s": 35.52160495278448,
+        "end_to_end_latency_s": 0.353772898,
+        "ttft_s": 0.128557849,
+        "inter_token_latency_s": 0.03930809977777778
+      }
+    }
+  ]
+}
