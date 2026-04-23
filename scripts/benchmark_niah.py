@@ -122,7 +122,7 @@ def _build_q2(target_tokens: int) -> tuple[str, str]:
         f"--- END OF DOCUMENT ---\n\n"
         f"Based on the spec sheet and operations log above, "
         f"what is the total volume of fluid moved during the run? "
-        f"Give the answer in litres."
+        f"Reply with the number only, in litres. No explanation."
     )
     return content, "450"
 
@@ -217,7 +217,7 @@ def score(qid: str, response: str, expected: str) -> tuple[bool, str]:
 # HTTP helper
 # ---------------------------------------------------------------------------
 
-def chat(host: str, model: str, user_content: str, max_tokens: int = 200) -> dict:
+def chat(host: str, model: str, user_content: str, max_tokens: int = 200, timeout: int = 300) -> dict:
     payload = {
         "model": model,
         "messages": [{"role": "user", "content": user_content}],
@@ -233,7 +233,7 @@ def chat(host: str, model: str, user_content: str, max_tokens: int = 200) -> dic
         method="POST",
     )
     t0 = time.perf_counter()
-    with request.urlopen(req, timeout=600) as resp:
+    with request.urlopen(req, timeout=timeout) as resp:
         data = json.loads(resp.read().decode())
     elapsed = time.perf_counter() - t0
 
@@ -301,7 +301,8 @@ def main() -> None:
             print(f"  ctx={ctx_size:>7,} tokens ... ", end="", flush=True)
             try:
                 user_content, expected = builder(ctx_size)
-                result = chat(args.host, args.model, user_content)
+                req_timeout = max(300, ctx_size // 50)
+                result = chat(args.host, args.model, user_content, timeout=req_timeout)
                 passed, detail = score(qid, result["content"], expected)
 
                 status = "PASS ✓" if passed else "FAIL ✗"
