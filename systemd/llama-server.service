@@ -11,15 +11,15 @@ ExecStart=/opt/llama.cpp/build/bin/llama-server \
   --host 0.0.0.0 \
   --port 8424 \
   -ngl 99 \
-  -c 32768 \
+  -c 131072 \
   -t 6 -tb 6 \
   --threads-http 1 \
   -np 1 \
   --no-cont-batching \
   -b 1024 -ub 1024 \
   --flash-attn on \
-  --cache-type-k q8_0 \
-  --cache-type-v q8_0 \
+  --cache-type-k turbo4 \
+  --cache-type-v turbo4 \
   --prio 2 --prio-batch 2
 Restart=on-failure
 RestartSec=5
