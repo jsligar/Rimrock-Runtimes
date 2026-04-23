@@ -1,0 +1,51 @@
+NIAH Benchmark — turbo4-128k
+Host:  http://127.0.0.1:8424
+Model: gemma-4-e2b-it-q4_k_m.gguf
+Sizes: [4096, 16384, 32768, 65536, 131072]
+Questions: ['Q1', 'Q2', 'Q3', 'Q4']
+
+============================================================
+Q1 — Needle Retrieval
+============================================================
+  ctx=  4,096 tokens ... PASS ✓     3795 prompt tokens  prefill=155.7 t/s  decode=14.66 t/s  elapsed=26.05s
+           detail: 7XQ-419-BETA
+  ctx= 16,384 tokens ... PASS ✓    15416 prompt tokens  prefill=70.9 t/s  decode=11.35 t/s  elapsed=219.65s
+           detail: 7XQ-419-BETA
+  ctx= 32,768 tokens ... ERROR: timed out
+  ctx= 65,536 tokens ... ERROR: timed out
+  ctx=131,072 tokens ... ERROR: timed out
+
+============================================================
+Q2 — Cross-Context Math
+============================================================
+  ctx=  4,096 tokens ... FAIL ✗     3798 prompt tokens  prefill=155.8 t/s  decode=14.09 t/s  elapsed=75.03s
+           detail: got: Based on the spec sheet:
+
+* **Pump A flow rate:** 12 L/min
+* **Pump B flow rate:
+  ctx= 16,384 tokens ... PASS ✓    15430 prompt tokens  prefill=70.8 t/s  decode=10.9 t/s  elapsed=236.32s
+           detail: 450 L
+  ctx= 32,768 tokens ... ERROR: timed out
+  ctx= 65,536 tokens ... ERROR: timed out
+  ctx=131,072 tokens ... ERROR: timed out
+
+============================================================
+Q3 — Instruction Drift
+============================================================
+  ctx=  4,096 tokens ... PASS ✓     3825 prompt tokens  prefill=252.9 t/s  decode=25.0 t/s  elapsed=42.82s
+           detail: 3 words: 'Rayleigh scattering occurs.'
+  ctx= 16,384 tokens ... FAIL ✗    15432 prompt tokens  prefill=128.5 t/s  decode=20.99 t/s  elapsed=120.46s
+           detail: 2 words: 'Rayleigh scattering.'
+  ctx= 32,768 tokens ... FAIL ✗    30902 prompt tokens  prefill=93.3 t/s  decode=16.33 t/s  elapsed=331.8s
+           detail: 2 words: 'Rayleigh scattering.'
+  ctx= 65,536 tokens ... ERROR: timed out
+  ctx=131,072 tokens ... ERROR: timed out
+
+============================================================
+Q4 — Contradiction/Recency
+============================================================
+  ctx=  4,096 tokens ... PASS ✓     3811 prompt tokens  prefill=253.3 t/s  decode=22.53 t/s  elapsed=101.13s
+           detail: 10.0.0.5 (correct)
+  ctx= 16,384 tokens ... PASS ✓    15401 prompt tokens  prefill=114.8 t/s  decode=18.33 t/s  elapsed=135.17s
+           detail: 10.0.0.5 (correct)
+  ctx= 32,768 tokens ... 
