@@ -103,9 +103,16 @@ TRT EP can only run generic ONNX ops (Add, Mul, Transpose) which represent <1% o
 
 ## Why 33.0 tok/s is the Hard Ceiling
 
-MatMulNBits (4-bit quantized weight dequant) is the dominant op at 19.8% of compute. ORT v1.24.4 predates the `USE_FPA_INTB_GEMM` build flag (added May–June 2025 via PRs #24854, #24955) which would bring the same FasterTransformer-derived CUTLASS kernels that MLC and TRT-LLM use. Estimated gain from that upgrade: ~1.25× on MatMulNBits → ~34.5 tok/s.
+MatMulNBits (4-bit quantized weight dequant) is the dominant op at 19.8% of compute. The original assumption was that ORT v1.24.4 simply predated the newer fpA/intB GEMM path, but the Rimrock checkout already contains those kernels and honors `ORT_FPA_INTB_GEMM=1`.
 
-The next viable path would be rebuilding ORT from a post-June-2025 commit with `USE_FPA_INTB_GEMM=ON`.
+The actual blocker is the Gemma 4 E2B ONNX export format: all 242 `MatMulNBits` nodes use `bits=4` with `block_size=32`. ORT's fpA/intB fast path only enables for block sizes 64 or 128, so the optimized int4 GEMM kernels are ineligible for this model even though the runtime code is present.
+
+`ORT_FPA_INTB_GEMM=1` was rechecked on Rimrock:
+
+- on `decoder_l2_fused.onnx`, it breaks full CUDA graph partitioning
+- on `decoder_l2_cuda_graph.onnx`, it still benchmarks at ~30.33ms / 32.97 inf/s, effectively identical to the 33.0 tok/s baseline
+
+The next viable ORT path is not a simple rebuild. It requires a Gemma 4 export or quantization format that produces `MatMulNBits` nodes with a supported block size for fpA/intB GEMM, or a different runtime whose int4 kernels support block size 32.
 
 ## Misc Notes
 

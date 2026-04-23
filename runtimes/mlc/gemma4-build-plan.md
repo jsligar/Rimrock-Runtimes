@@ -145,6 +145,81 @@ sudo docker run --rm --runtime nvidia \
 
 Target: beat llama-server baseline of **26–29 tok/s**. Expected: **35–50 tok/s**.
 
+## Exposed CLI Surface (verified 2026-04-22)
+
+### `mlc_llm convert_weight`
+
+- Required path/config positional arg plus:
+- `--quantization`
+- `--model-type`
+- `--device`
+- `--source`
+- `--source-format`
+- `--output`
+- `--lora-adapter`
+
+### `mlc_llm gen_config`
+
+- Required path/config positional arg plus:
+- `--quantization`
+- `--model-type`
+- `--conv-template`
+- `--context-window-size`
+- `--sliding-window-size`
+- `--prefill-chunk-size`
+- `--attention-sink-size`
+- `--tensor-parallel-shards`
+- `--pipeline-parallel-stages`
+- `--disaggregation`
+- `--max-batch-size`
+- `--output`
+
+### `mlc_llm compile`
+
+- Required model positional arg plus:
+- `--quantization`
+- `--model-type`
+- `--device`
+- `--host`
+- `--opt`
+- `--system-lib-prefix`
+- `--output`
+- `--overrides`
+- `--debug-dump`
+
+### `--opt` detail knobs
+
+The CLI only advertises presets `O0`/`O1`/`O2`/`O3`, but upstream `OptimizationFlags`
+also accepts explicit knobs:
+
+- `flashinfer=0|1`
+- `cublas_gemm=0|1`
+- `faster_transformer=0|1`
+- `cudagraph=0|1`
+- `cutlass=0|1`
+- `ipc_allreduce_strategy=NONE|ONESHOT|TWOSHOT|AUTO`
+
+Observed caveats for Rimrock / SM87:
+
+- `cublas_gemm` mainly applies to CUDA/ROCm full-precision and fp8/e4m3/e5m2 paths, not `q4f16_1`
+- upstream `cutlass` extern enablement is gated to CUDA `sm_90a` / `sm_100a`, so do not expect a win from `cutlass=1` on Orin SM87
+- `flashinfer` is exposed but already showed a fallback/instability path in this branch; keep it as a toggle, not an assumption
+
+## Recommended Next Model
+
+Use **Gemma 3 1B IT q4f16_1** as the reference MLC pipeline model, and **Nemotron-3-Nano-4B** as the next serious quality target.
+
+Why this split:
+
+- Gemma 3 1B IT is the cleanest verified MLC baseline on Rimrock so far: **3.0/5** at about **62 tok/s**
+- Gemma 4 E2B now compiles and runs correctly, but quality is only **2.8/5** and the current fresh build still hard-limits us to `4096` ctx and `1024` prefill
+- Nemotron is supported by this branch at the architecture/template level (`model-type nemotron`, `conv-template nemotron`) and is already the strongest quality-first model in llama-server results on this hardware
+
+Practical decision:
+
+- If the goal is **stabilize the build pipeline**, iterate on Gemma 3 1B IT first
+- If the goal is **best next quality experiment in MLC**, try Nemotron-3-Nano-4B next
+
 ## Risk Register
 
 | Risk | Likelihood | Impact | Mitigation |

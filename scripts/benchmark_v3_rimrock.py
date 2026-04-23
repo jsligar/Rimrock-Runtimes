@@ -17,8 +17,10 @@ DEFAULT_HOST = "http://172.16.0.248:8424"
 DEFAULT_MODEL = "gemma-4-E2B-it-UD-Q4_K_XL.gguf"
 MEMORY_HOST = "http://172.16.0.248:8001"
 THINKING = "off"
+DEFAULT_RUNTIME_LABEL = "llama-server"
+DEFAULT_SYSTEM_PROMPT_STYLE = "memory"
 
-SYSTEM_PROMPT = (
+MEMORY_SYSTEM_PROMPT = (
     "You are a precise assistant with a persistent memory palace. "
     "Follow these rules every session:\n\n"
     "1. SEARCH BEFORE ANSWERING: For questions involving hardware registers, pin numbers, board identifiers, "
@@ -30,6 +32,21 @@ SYSTEM_PROMPT = (
     "3. DIRECT ANSWERS for straightforward logic, arithmetic, and coding you can answer confidently.\n\n"
     "You may call tools as many times as needed before producing your final answer."
 )
+
+MINIMAL_SYSTEM_PROMPT = (
+    "You are a precise assistant. Follow the user's requested output format exactly. "
+    "Do not add extra text, code fences, or explanations unless explicitly requested."
+)
+
+
+def select_system_prompt(style: str) -> str | None:
+    if style == "memory":
+        return MEMORY_SYSTEM_PROMPT
+    if style == "minimal":
+        return MINIMAL_SYSTEM_PROMPT
+    if style == "none":
+        return None
+    raise ValueError(f"Unknown system prompt style: {style}")
 
 TOOLS = [
     {
@@ -99,23 +116,31 @@ def normalize(value: str) -> str:
     return re.sub(r"\s+", " ", value.strip().lower())
 
 
-def chat(host: str, model: str, messages: list[dict[str, str]], max_tokens: int) -> dict[str, Any]:
+def chat(
+    host: str,
+    model: str,
+    messages: list[dict[str, str]],
+    max_tokens: int,
+    disable_system_prompt: bool,
+    disable_tools: bool,
+    system_prompt_style: str,
+) -> dict[str, Any]:
     # Prepend system prompt if not already present
     full_messages = messages
-    if not messages or messages[0].get("role") != "system":
-        full_messages = [{"role": "system", "content": SYSTEM_PROMPT}] + messages
+    system_prompt = None if disable_system_prompt else select_system_prompt(system_prompt_style)
+    if system_prompt is not None and (not messages or messages[0].get("role") != "system"):
+        full_messages = [{"role": "system", "content": system_prompt}] + messages
 
     total_tokens = 0
     total_ms = 0.0
     started = time.perf_counter()
 
     # Tool-calling loop — runs until model stops calling tools
-    for _ in range(5):  # max 5 tool rounds
+    max_rounds = 1 if disable_tools else 5
+    for _ in range(max_rounds):
         payload = {
             "model": model,
             "messages": full_messages,
-            "tools": TOOLS,
-            "tool_choice": "auto",
             "stream": False,
             "temperature": 0.1,
             "top_k": 40,
@@ -125,6 +150,9 @@ def chat(host: str, model: str, messages: list[dict[str, str]], max_tokens: int)
             "repeat_penalty": 1.0,
             "max_tokens": max_tokens,
         }
+        if not disable_tools:
+            payload["tools"] = TOOLS
+            payload["tool_choice"] = "auto"
         req = request.Request(
             f"{host}/v1/chat/completions",
             data=json.dumps(payload).encode("utf-8"),
@@ -143,7 +171,7 @@ def chat(host: str, model: str, messages: list[dict[str, str]], max_tokens: int)
         finish_reason = data["choices"][0].get("finish_reason", "stop")
         tool_calls = message.get("tool_calls") or []
 
-        if not tool_calls or finish_reason != "tool_calls":
+        if disable_tools or not tool_calls or finish_reason != "tool_calls":
             break
 
         # Execute each tool call and append results
@@ -400,15 +428,21 @@ TESTS: list[dict[str, Any]] = [
 ]
 
 
-def run_q8(host: str, model: str) -> dict[str, Any]:
+def run_q8(
+    host: str,
+    model: str,
+    disable_system_prompt: bool,
+    disable_tools: bool,
+    system_prompt_style: str,
+) -> dict[str, Any]:
     messages = [{"role": "user", "content": "My name is Maya. I work in marine biology. I live in Auckland."}]
-    turn1 = chat(host, model, messages, 128)
+    turn1 = chat(host, model, messages, 128, disable_system_prompt, disable_tools, system_prompt_style)
     messages.append({"role": "assistant", "content": turn1["content"]})
     messages.append({"role": "user", "content": "What field do I work in?"})
-    turn2 = chat(host, model, messages, 128)
+    turn2 = chat(host, model, messages, 128, disable_system_prompt, disable_tools, system_prompt_style)
     messages.append({"role": "assistant", "content": turn2["content"]})
     messages.append({"role": "user", "content": "If it is 2026-07-01 15:00 UTC, what local date and time is it for me?"})
-    turn3 = chat(host, model, messages, 256)
+    turn3 = chat(host, model, messages, 256, disable_system_prompt, disable_tools, system_prompt_style)
     combined = f"Turn2: {turn2['content']}\nTurn3: {turn3['content']}"
     score, failure = validate_q8(combined)
     return {
@@ -425,7 +459,15 @@ def run_q8(host: str, model: str) -> dict[str, Any]:
     }
 
 
-def build_report(host: str, model: str, results: list[dict[str, Any]]) -> str:
+def build_report(
+    host: str,
+    model: str,
+    results: list[dict[str, Any]],
+    runtime_label: str,
+    disable_system_prompt: bool,
+    disable_tools: bool,
+    system_prompt_style: str,
+) -> str:
     raw_avg = round(sum(r["score"] for r in results) / len(results), 2)
     weighted_avg = round(sum(r["score"] * r["weight"] for r in results) / sum(r["weight"] for r in results), 2)
     total_tokens = sum((r.get("output_tokens") or 0) for r in results)
@@ -439,10 +481,13 @@ def build_report(host: str, model: str, results: list[dict[str, Any]]) -> str:
         f"Run: `{now}`",
         f"Model: `{model}`",
         "Machine: `rimrock`",
-        "Runtime: `llama-server`",
+        f"Runtime: `{runtime_label}`",
         f"Host: `{host}`",
         f"Thinking: `{THINKING}`",
-        f"Tools: `mempalace_search, mempalace_kg_query`",
+        f"Harness system prompt style: `{system_prompt_style}`",
+        f"Harness system prompt: `{not disable_system_prompt}`",
+        f"Harness tools enabled: `{not disable_tools}`",
+        f"Tools: `{', '.join(x['function']['name'] for x in TOOLS) if not disable_tools else 'disabled'}`",
         f"Raw average: `{raw_avg}/10`",
         f"Weighted average: `{weighted_avg}/10`",
         f"Output tokens: `{total_tokens}`",
@@ -479,24 +524,58 @@ def main() -> None:
     parser.add_argument("--host", default=DEFAULT_HOST)
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--out-dir", default="/mnt/claude-nas")
+    parser.add_argument("--runtime-label", default=DEFAULT_RUNTIME_LABEL)
+    parser.add_argument("--disable-system-prompt", action="store_true")
+    parser.add_argument("--disable-tools", action="store_true")
+    parser.add_argument(
+        "--system-prompt-style",
+        choices=["memory", "minimal", "none"],
+        default=DEFAULT_SYSTEM_PROMPT_STYLE,
+    )
     args = parser.parse_args()
+
+    # Backward-compatible behavior: --disable-system-prompt overrides style.
+    if args.disable_system_prompt:
+        args.system_prompt_style = "none"
 
     results: list[dict[str, Any]] = []
     for test in TESTS[:7]:
         print(f"Running {test['id']} {test['name']}...", flush=True)
-        result = chat(args.host, args.model, test["messages"], test["max_tokens"])
+        result = chat(
+            args.host,
+            args.model,
+            test["messages"],
+            test["max_tokens"],
+            args.disable_system_prompt,
+            args.disable_tools,
+            args.system_prompt_style,
+        )
         score, failure = test["validator"](result["content"])
         results.append({**test, **result, "response": result["content"], "score": score, "failure_mode": failure})
         print(f"  {score}/10 {failure}", flush=True)
 
     print("Running Q8 Fixed-Date Context Retention...", flush=True)
-    q8 = run_q8(args.host, args.model)
+    q8 = run_q8(
+        args.host,
+        args.model,
+        args.disable_system_prompt,
+        args.disable_tools,
+        args.system_prompt_style,
+    )
     results.append(q8)
     print(f"  {q8['score']}/10 {q8['failure_mode']}", flush=True)
 
     for test in TESTS[7:]:
         print(f"Running {test['id']} {test['name']}...", flush=True)
-        result = chat(args.host, args.model, test["messages"], test["max_tokens"])
+        result = chat(
+            args.host,
+            args.model,
+            test["messages"],
+            test["max_tokens"],
+            args.disable_system_prompt,
+            args.disable_tools,
+            args.system_prompt_style,
+        )
         score, failure = test["validator"](result["content"])
         results.append({**test, **result, "response": result["content"], "score": score, "failure_mode": failure})
         print(f"  {score}/10 {failure}", flush=True)
@@ -511,7 +590,18 @@ def main() -> None:
     raw_path = Path("/tmp") / f"benchmark-v3-rimrock-tools-{stamp}.json"
     report_path = Path("/tmp") / f"benchmark-report-gemma4-e2b-ud-q4xl-rimrock-v3-tools-{stamp}.md"
     raw_path.write_text(json.dumps(results, indent=2), encoding="utf-8")
-    report_path.write_text(build_report(args.host, args.model, results), encoding="utf-8")
+    report_path.write_text(
+        build_report(
+            args.host,
+            args.model,
+            results,
+            args.runtime_label,
+            args.disable_system_prompt,
+            args.disable_tools,
+            args.system_prompt_style,
+        ),
+        encoding="utf-8",
+    )
     final_raw = out_dir / raw_path.name
     final_report = out_dir / report_path.name
     final_raw.write_text(raw_path.read_text(encoding="utf-8"), encoding="utf-8")

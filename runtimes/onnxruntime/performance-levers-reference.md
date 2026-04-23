@@ -57,6 +57,7 @@
 - Variable head dims (256/512) may break Attention fusion pattern matching.
 - KV sharing (15 pairs / 35 layers) must be handled manually in raw ORT session loop.
 - `trt_cuda_graph_enable` blocked on Jetson Orin per NVIDIA docs — use CUDA EP graph instead.
+- Gemma 4 E2B q4f16 exports currently use `MatMulNBits` with `block_size=32`; ORT's fpA/intB fast path only enables for block sizes 64 or 128, so `ORT_FPA_INTB_GEMM=1` does not unlock the newer int4 GEMM kernels for this model.
 
 ---
 
@@ -68,3 +69,8 @@
 - **L4 achieved:** IO binding benchmark — 34.4ms / 29.03 inf/s (vs 193.6ms CPU baseline = 82% faster)
 - **L5 blocked:** CUDA graph fails — 11 CPU fallback nodes in attention mask subgraph prevent full graph capture
 - Next: profiling pass (L9), then offline transformer optimizer fusions (L2/L8)
+
+Update after recheck:
+
+- The Rimrock ORT source tree already contains fpA/intB GEMM code and the `ORT_FPA_INTB_GEMM` runtime switch.
+- Enabling `ORT_FPA_INTB_GEMM=1` does not improve Gemma 4 E2B throughput because the model's quantized `MatMulNBits` nodes use `block_size=32`, which is outside the kernel eligibility range.
