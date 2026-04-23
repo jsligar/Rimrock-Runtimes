@@ -36,12 +36,11 @@ echo 3199000000 | sudo tee /sys/kernel/debug/bpmp/debug/clk/emc/rate
 
 ## Current Production Setup
 
-| Role | Model | Runtime | Tok/s | Score |
-|---|---|---|---:|---:|
-| **Primary (latency-first)** | Gemma 4 E2B Q4_K_M (sowilow) | llama-server build 8664 | ~26.3 | 4.6/5 |
-| **Quality-first** | Nemotron-3-Nano-4B Q4_K_M | llama-server build 8664 | ~14.9 | 5.0/5 |
+| Role | Model | Runtime | CTX | KV Cache | Tok/s | Score |
+|---|---|---|---:|---|---:|---:|
+| **Primary** | Gemma 4 E2B Q4_K_M (sowilow) | llama-server build 8664 | 131072 | turbo4 | ~28 | 5.04/10 |
 
-Both are text + vision capable (mmproj loaded). Context window: **32768** as of 2026-04-21.
+Text + vision capable (mmproj loaded). Context window: **131072** (model ceiling, n_ctx_train=131072) as of 2026-04-22.
 
 Startup script: [`runtimes/llama-cpp/start_llama.sh`](runtimes/llama-cpp/start_llama.sh)
 
@@ -57,6 +56,18 @@ Startup script: [`runtimes/llama-cpp/start_llama.sh`](runtimes/llama-cpp/start_l
 ## Benchmark Summary
 
 Full results: [`benchmarks/master-results-2026-04-08.md`](benchmarks/master-results-2026-04-08.md)
+
+### v3 Harness (2026-04-22, 12-question suite, weighted)
+
+| Label | CTX | KV Cache | Score | Tok/s |
+|---|---:|---|---:|---:|
+| llama-server-turbo4-128k | 131072 | turbo4 | **5.04/10** | 28.06 |
+| llama-server-turbo4 | 32768 | turbo4 | **5.04/10** | ~28 |
+| llama-server-q8 | 32768 | q8_0 | **5.04/10** | ~28 |
+
+Score is flat across all context sizes and KV types — model ceiling on this task suite, not a hardware limit. Turbo4 KV and Q8_0 KV are effectively identical in throughput and quality at these context sizes.
+
+### v1 Harness (legacy, 5-point scale)
 
 | Model | Runtime | Avg Score | Tok/s |
 |---|---|---:|---:|
@@ -75,18 +86,22 @@ Full results: [`benchmarks/master-results-2026-04-08.md`](benchmarks/master-resu
 runtimes/
   llama-cpp/      production runtime — configs, startup script, build notes
   onnxruntime/    ORT CUDA EP investigation — all levers, profiling, final state
-  mlc/            MLC-LLM evaluation results
+  mlc/            MLC-LLM evaluation results (gemma4 e2b, nemotron-nano-4b, small models)
 benchmarks/
-  master-results-2026-04-08.md   consolidated leaderboard
+  master-results-2026-04-08.md         consolidated legacy leaderboard
   mlc-runtime-2026-04-09.md
   ort-progress-2026-04-19.md
   ort-profile-gemma4-e2b.md
   mlc-small-models-2026-04-20.md
-  raw/2026-04-20-mlc-small-models/  raw CSV/JSON artifacts + exact commands
-  vision-benchmark-suite-v2.md
+  mlc-gemma4-e2b-2026-04-21.md
+  vision-results-2026-04-21.md
+  benchmark-report-*-20260422-*.md     v3 harness runs (q8, turbo4, turbo4-128k)
+  raw/2026-04-20-mlc-small-models/     raw CSV/JSON artifacts + exact commands
+  raw/2026-04-21-mlc-gemma4-text/      MLC gemma4 text benchmark raw data
 models/
   README.md       what's on disk at /opt/models/, paths, quant notes
 scripts/
-  run_mlc_small_model_sweep.sh   rerun April 20 MLC sweep
-  tool_call_probe.py             lightweight OpenAI-compatible tool discipline probe
+  benchmark_v3_rimrock.py              v3 benchmark harness (12-question, weighted)
+  run_mlc_small_model_sweep.sh         rerun April 20 MLC sweep
+  tool_call_probe.py                   lightweight OpenAI-compatible tool discipline probe
 ```
