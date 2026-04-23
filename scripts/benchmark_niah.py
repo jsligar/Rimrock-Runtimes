@@ -214,6 +214,26 @@ def score(qid: str, response: str, expected: str) -> tuple[bool, str]:
 
 
 # ---------------------------------------------------------------------------
+# KV cache flush
+# ---------------------------------------------------------------------------
+
+def flush_kv(host: str) -> None:
+    """Erase slot 0's KV cache so each test starts with a clean state."""
+    payload = json.dumps({"action": "erase"}).encode()
+    req = request.Request(
+        f"{host}/slots/0",
+        data=payload,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with request.urlopen(req, timeout=10):
+            pass
+    except Exception:
+        pass  # endpoint absent on some builds — non-fatal
+
+
+# ---------------------------------------------------------------------------
 # HTTP helper
 # ---------------------------------------------------------------------------
 
@@ -302,6 +322,7 @@ def main() -> None:
             try:
                 user_content, expected = builder(ctx_size)
                 req_timeout = max(300, ctx_size // 50)
+                flush_kv(args.host)
                 result = chat(args.host, args.model, user_content, timeout=req_timeout)
                 passed, detail = score(qid, result["content"], expected)
 
